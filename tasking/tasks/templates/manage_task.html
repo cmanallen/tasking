@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block article %}
+	{% if task.id %}
+		<h2 class="inblock">Update Task</h2>
+		<!-- Delete Task Controller -->
+		<a href="#delete" class="pop-up-controller">Test<button type="button" class="btn btn-danger ftrt mt20">Delete Task</button></a>
+		<!-- Delete Task Pop-up -->
+		<div id="delete" class="abs pop-up">
+			<div class="pop-up-container">
+				<h2 class="abs white center shadow hpad20">Delete</h2>
+				<form action="{% url "delete-task" pk=task.id %}" method="POST" class="abs pop-up-body text-center">
+					{% csrf_token %}
+					<button type="submit" value="Yes, delete." class="btn btn-danger">Delete</button>
+					<a href="{% url "list-task" %}"><button type="text" class="btn btn-primary">Cancel</button></a>
+				</form>
+			</div>
+		</div>
+	{% else %}
+		<h2 class="inblock">Create Task</h2>
+	{% endif %}
+	<hr />
+	<form action="{{ action }}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% for field in form %}
+			<h4>{{ field.label }}</h4>
+			{{ field }}
+			<br />
+			<br />
+		{% endfor %}
+		<br />
+		{% if task.id %}
+			<input type="submit" value="Update" class="btn btn-put">
+		{% else %}
+			<input type="submit" value="Create" class="btn btn-post">
+		{% endif %}
+	</form>
+{% endblock %}

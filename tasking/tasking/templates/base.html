@@ -1,0 +1,90 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>Tasking - The King of Task Management</title>
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Styles -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" media="screen">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="wrapper">
+			{% if user.is_authenticated %}
+				<!-- Header -->
+				<header class="col-md-2 fill">
+					<!-- User Area -->
+					<div>
+						<p>{{ user.email }}</p>
+						<a href="/user/logout">Log out</a>					
+					</div>
+					<!-- Search -->
+					<!-- <div class="input-group">
+						<span class="input-group-addon">Search</span>
+						<input type="text" class="form-control" placeholder="grocery list">
+					</div> -->
+					<!-- Navigation -->
+					<nav>
+						<p class="white">Browse</p>
+						<ul class="list-unstyled">
+							<li><a href="/projects">Projects</a></li>
+							<li><a href="/tasks">Tasks</a></li>
+							<li><a href="/users">Users</a></li>
+							<li><a href="/teams">Teams</a></li>
+						</ul>
+					</nav>
+					<!-- Quicklist -->
+					<nav>
+						<p class="white">Quick List</p>
+						<ul class="list-unstyled">
+							{% block quicklist %}
+							{% endblock %}
+						</ul>
+					</nav>
+				</header>
+				<!-- Content -->
+				<main class="col-md-8 fill">
+					<!-- Primary Information -->
+					<article>
+						{% block article %}
+						{% endblock %}
+					</article>
+					<!-- Footer -->
+					<footer>
+						<!-- Sitemap -->
+						<!-- Return to top -->
+						{% block footer %}
+						{% endblock %}
+					</footer>	
+				</main>
+				<!-- Secondary Information (Meta Data) -->
+				<aside class="col-md-2 fill">
+					{% block aside %}
+						<p>Test!</p>
+					{% endblock %}
+				</aside>
+			{% else %}
+				<h2>Log In</h2>
+				<form action="/user/login" method="POST">
+					{% csrf_token %}
+					<h4>Username</h4>
+					<input type="text" name="username" placeholder="admin">
+					<h4>Password</h4>
+					<input type="password" name="password">
+					<div class="btn-list">
+						<button type="submit">Log in</button>
+					</div>
+				</form>
+			{% endif %}
+			</div>
+		</div>
+	</div>
+	<!-- Scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

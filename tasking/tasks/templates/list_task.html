@@ -17,6 +17,7 @@
 				<th>Type</th>
 				<th>Owner</th>
 				<th>Creator</th>
+				<th>Project</th>
 				<th>Due</th>
 			</tr>
 		</thead>
@@ -27,7 +28,8 @@
 				<td>{{ task.get_status_display }}</td>
 				<td>{{ task.get_task_type_display }}</td>
 				<td>{{ user_task.user }}</td>
-				<td>{{ task.created_by }}</td>
+				<td><a href="/users/profile/{{ task.created_by.id }}">{{ task.created_by }}</a></td>
+				<td><a href="/projects/{{ task.project.id }}">{{ task.project.name }}</a></td>
 				<td>{{ task.due }}</td>
 			</tr>
 			{% endfor %}

@@ -37,9 +37,13 @@ urlpatterns = patterns('',
     url(r'^projects/delete/(?P<pk>\d+)/$', projects.views.DeleteProject.as_view(),
         name='delete-project'),
     # Users
-    url(r'^user/login$', users.views.user_login,
+    url(r'^users/login$', users.views.user_login,
         name='login-user'),
-    url(r'^user/logout$', users.views.user_logout,
+    url(r'^users/logout$', users.views.user_logout,
         name='logout-user'),
+    url(r'^users/create$', users.views.user_register,
+        name='create-user'),
+    url(r'^users/profile/(?P<pk>\d+)/$', users.views.DetailUser.as_view(),
+        name='detail-user'),
     # Teams
 )

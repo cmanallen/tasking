@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block article %}
+	<!-- Project Heading -->
+	<h2 class="inblock">{{ project.name }}</h2>
+	{% if user.is_authenticated %}
+		<a href="{% url "update-project" pk=project.id %}" class="ftrt mt20">
+			<button type="button" class="btn btn-primary">Update project</button>
+		</a>
+		<!-- <a href="#" class="ftrt mt20 mr10">
+			<button type="button" class="btn btn-primary">Create Task</button>
+		</a> -->
+	{% endif %}
+	<p>Created by <b>{{ project.created_by }}</b> on <i>{{ project.created }}</i></p>
+	<hr />
+	<!-- Descriptions -->
+	<p class="serif mb20">{{ project.description }}</p>
+	<hr />
+	<!-- Comments -->
+{% endblock %}
+{% block aside %}
+	<h4 class="mt20">Assignment History</h4>
+	<h4>Related projects</h4>
+{% endblock %}

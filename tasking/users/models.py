@@ -8,6 +8,7 @@ class Profile(TimeStamp):
 	# Relations
 	user = models.OneToOneField(User)
 	# Fields
-	first = models.CharField(max_length=255, blank=True)
-	last = models.CharField(max_length=255, blank=True)
 	avatar = models.ImageField(upload_to='images/', blank=True, null=True)
+
+	def get_absolute_url(self):
+		return reverse('detail-user', kwargs={'pk': self.id})

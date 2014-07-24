@@ -16,12 +16,10 @@
 			<div class="wrapper">
 			{% if user.is_authenticated %}
 				<!-- Header -->
-				<header class="col-md-2 fill">
-					<!-- User Area -->
-					<div>
-						<p>{{ user.email }}</p>
-						<a href="/user/logout">Log out</a>					
-					</div>
+				<header class="col-md-1 fill">
+					<!-- Logo -->
+					<figure></figure>
+					<h2 class="white">Tasking</h2>
 					<!-- Search -->
 					<!-- <div class="input-group">
 						<span class="input-group-addon">Search</span>
@@ -45,9 +43,13 @@
 							{% endblock %}
 						</ul>
 					</nav>
+					<!-- User Area -->
+					<div class="abs bottom text-center fluid" style="margin-left:-15px">
+						<a href="/users/logout">Log out</a>					
+					</div>
 				</header>
 				<!-- Content -->
-				<main class="col-md-8 fill">
+				<main class="col-md-9 fill">
 					<!-- Primary Information -->
 					<article>
 						{% block article %}
@@ -69,7 +71,7 @@
 				</aside>
 			{% else %}
 				<h2>Log In</h2>
-				<form action="/user/login" method="POST">
+				<form action="/users/login" method="POST">
 					{% csrf_token %}
 					<h4>Username</h4>
 					<input type="text" name="username" placeholder="admin">

@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from users.models import User
 from utils.models import TimeStamp
 from projects.models import Project
 

@@ -4,23 +4,23 @@ from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth import authenticate, login, logout
-from users.models import Profile
+from users.models import User
 
 # Class Based Views
 class ListUser(ListView):
-    model = Profile
+    model = User
     template_name = 'list_user.html'
 
 class DetailUser(DetailView):
-    model = Profile
+    model = User
     template_name = 'detail_user.html'
 
 class UpdateUser(UpdateView):
-    model = Profile
+    model = User
     template_name = 'manage_user.html'
 
 class DeleteUser(DeleteView):
-    model = Profile
+    model = User
     template_name = 'manage_user.html'
 
 # Create user

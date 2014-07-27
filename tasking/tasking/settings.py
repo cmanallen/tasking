@@ -96,3 +96,6 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     'tasking/templates',
 )
+
+# User Profiles
+AUTH_USER_MODEL = "users.User"

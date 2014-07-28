@@ -45,5 +45,7 @@ urlpatterns = patterns('',
         name='create-user'),
     url(r'^users/profile/(?P<pk>\d+)/$', users.views.DetailUser.as_view(),
         name='detail-user'),
+    url(r'^users/$', users.views.ListUser.as_view(),
+        name='list-user'),
     # Teams
 )

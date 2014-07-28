@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth import authenticate, login, logout
 from users.models import User
+from users.forms import UserRegisterForm
 
 # Class Based Views
 class ListUser(ListView):
@@ -28,16 +29,13 @@ def user_register(request):
     if request.user.is_anonymous():
         if request.method == 'POST':
             form = UserRegisterForm(request.POST)
-            if form.is_valid:
+            if form.is_valid():
                 form.save()
-                return HttpResponse('User created succcessfully.')
+                return HttpResponseRedirect('/users/login')
         else:
             form = UserRegisterForm()
-        context = {}
-        context.update(csrf(request))
-        context['form'] = form
-        #Pass the context to a template
-        return render_to_response('register.html', context)
+
+        return HttpResponseRedirect('/users/create')
     else:
         return HttpResponseRedirect('/')
 

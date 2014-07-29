@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block aside %}
+{% endblock %}
+{% block article %}
+	<h2>Update User</h2>
+	<form action="{{ action }}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% for field in form %}
+			<h4>{{ field.label }}</h4>
+			{{ field }}
+			<br />
+			<br />
+		{% endfor %}
+		<br />
+		<input type="submit" value="Update" class="btn btn-put">
+	</form>
+{% endblock %}

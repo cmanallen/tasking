@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
-
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
@@ -43,9 +44,11 @@ urlpatterns = patterns('',
         name='logout-user'),
     url(r'^users/create$', users.views.user_register,
         name='create-user'),
+    url(r'^users/update/(?P<pk>\d+)/$', users.views.UpdateUser.as_view(),
+        name='update-user'),
     url(r'^users/profile/(?P<pk>\d+)/$', users.views.DetailUser.as_view(),
         name='detail-user'),
     url(r'^users/$', users.views.ListUser.as_view(),
         name='list-user'),
     # Teams
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

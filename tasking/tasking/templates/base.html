@@ -15,18 +15,31 @@
 		<div class="row">
 			<div class="wrapper">
 			{% if user.is_authenticated %}
+				
 				<!-- Header -->
-				<header class="col-md-1 fill">
-					<!-- Logo -->
-					<figure></figure>
-					<h2 class="white">Tasking</h2>
-					<!-- Search -->
-					<!-- <div class="input-group">
-						<span class="input-group-addon">Search</span>
-						<input type="text" class="form-control" placeholder="grocery list">
-					</div> -->
+				<header class="col-md-1 fill" style="width:12%;padding:0;">
+					
+					<!-- User Area -->
+					<div id="user-area" class="autoflow mb20 vpad20 hpad20" style="background:#162636;">
+						<figure class="ftlt mr10">
+							<img src="/media/images/096.jpg" alt="avatar" style="width:50px;height:50px;border-radius:25px;" />
+						</figure>
+						<div class="mt5">
+							<span class="white"><b>{{ user.first_name }} {{ user.last_name }}</b></span><br />
+							<a href="/users/profile/{{ user.id }}">
+								<img src="{% static 'images/person.png' %}" alt="View Profile">
+							</a>
+							<a href="/users/update/{{ user.id }}">
+								<img src="{% static 'images/cog.png' %}" alt="Edit Profile">
+							</a>
+							<a href="/users/logout">
+								<img src="{% static 'images/logout.png' %}" alt="Logout">
+							</a>
+						</div>
+					</div>
+					
 					<!-- Navigation -->
-					<nav>
+					<nav class="hpad20">
 						<p class="white">Browse</p>
 						<ul class="list-unstyled">
 							<li><a href="/projects">Projects</a></li>
@@ -35,26 +48,27 @@
 							<li><a href="/teams">Teams</a></li>
 						</ul>
 					</nav>
+					
 					<!-- Quicklist -->
-					<nav>
+					<nav class="hpad20">
 						<p class="white">Quick List</p>
 						<ul class="list-unstyled">
 							{% block quicklist %}
 							{% endblock %}
 						</ul>
 					</nav>
-					<!-- User Area -->
-					<div class="abs bottom text-center fluid" style="margin-left:-15px">
-						<a href="/users/logout">Log out</a>					
-					</div>
+				
 				</header>
+				
 				<!-- Content -->
-				<main class="col-md-9 fill">
+				<main class="col-md-9 fill" style="width:71.3333%;">
+					
 					<!-- Primary Information -->
 					<article>
 						{% block article %}
 						{% endblock %}
 					</article>
+					
 					<!-- Footer -->
 					<footer>
 						<!-- Sitemap -->
@@ -62,14 +76,19 @@
 						{% block footer %}
 						{% endblock %}
 					</footer>	
+				
 				</main>
+				
 				<!-- Secondary Information (Meta Data) -->
 				<aside class="col-md-2 fill">
 					{% block aside %}
 						<p>Test!</p>
 					{% endblock %}
 				</aside>
+			
 			{% else %}
+				
+				<!--  -->
 				<h2>Log In</h2>
 				<form action="/users/login" method="POST">
 					{% csrf_token %}
@@ -81,6 +100,7 @@
 						<button type="submit">Log in</button>
 					</div>
 				</form>
+				
 				<!--  -->
 				<h2>Register</h2>
 				<form action="/users/create" method="POST">
@@ -95,6 +115,7 @@
 						<button type="submit">Register</button>
 					</div>
 				</form>
+				
 			{% endif %}
 			</div>
 		</div>

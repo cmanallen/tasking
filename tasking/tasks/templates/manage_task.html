@@ -4,18 +4,10 @@
 	{% if task.id %}
 		<h2 class="inblock">Update Task</h2>
 		<!-- Delete Task Controller -->
-		<a href="#delete" class="pop-up-controller">Test<button type="button" class="btn btn-danger ftrt mt20">Delete Task</button></a>
-		<!-- Delete Task Pop-up -->
-		<div id="delete" class="abs pop-up">
-			<div class="pop-up-container">
-				<h2 class="abs white center shadow hpad20">Delete</h2>
-				<form action="{% url "delete-task" pk=task.id %}" method="POST" class="abs pop-up-body text-center">
-					{% csrf_token %}
-					<button type="submit" value="Yes, delete." class="btn btn-danger">Delete</button>
-					<a href="{% url "list-task" %}"><button type="text" class="btn btn-primary">Cancel</button></a>
-				</form>
-			</div>
-		</div>
+		<form action="{% url "delete-task" pk=task.id %}" method="POST" class="ftrt mt20">
+			{% csrf_token %}
+			<button type="submit" value="Yes, delete." class="btn btn-danger">Delete</button>
+		</form>
 	{% else %}
 		<h2 class="inblock">Create Task</h2>
 	{% endif %}

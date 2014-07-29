@@ -9,3 +9,6 @@ class Project(TimeStamp):
 	# Table Fields
 	name = models.CharField(max_length=255)
 	description = models.TextField()
+	# Model Methods
+	def __str__(self):
+		return "%s" % self.name

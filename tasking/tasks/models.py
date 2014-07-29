@@ -45,7 +45,7 @@ class Task(TimeStamp):
 		return reverse('detail-task', kwargs={'pk': self.id})
 
 	def __str__(self):
-		return "%s" % self.project.name
+		return "%s" % self.name
 	
 	# Class meta data
 	class Meta:

@@ -7,9 +7,6 @@
 		<a href="{% url "update-task" pk=task.id %}" class="ftrt mt20">
 			<button type="button" class="btn btn-primary">Update Task</button>
 		</a>
-		<a href="#" class="ftrt mt20 mr10">
-			<button type="button" class="btn btn-warning">Reassign</button>
-		</a>
 	{% endif %}
 	<p>Created by <b>{{ task.created_by }}</b> on <i>{{ task.created }}</i></p>
 	<hr />
@@ -19,6 +16,7 @@
 	<!-- Comments -->
 {% endblock %}
 {% block aside %}
+	<button type="button" class="btn btn-success">Assign User</button>
 	<h4 class="mt20">Assignment History</h4>
 	<h4>Related Tasks</h4>
 {% endblock %}

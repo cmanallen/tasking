@@ -21,9 +21,11 @@ class Task(TimeStamp):
 		(BUG, 'Issue'),
 		(FEATURE, 'Request'),
 	)
+	
 	# Relations
 	user_task = models.ManyToManyField(User, through='UserTask')
 	project = models.ForeignKey(Project, blank=True)
+	
 	# Table Fields
 	name = models.CharField(max_length=255)
 	description = models.TextField()
@@ -31,13 +33,20 @@ class Task(TimeStamp):
 	task_type = models.IntegerField(choices=TYPE_CHOICES)
 	due = models.DateField()
 	created_by = models.ForeignKey(User, related_name='creator')
+	
 	# Model methods
 	def get_task_comment(self):
 		return self.comment_set.all()
+
 	def get_task_user(self):
 		return self.usertask_set.all()
+
 	def get_absolute_url(self):
 		return reverse('detail-task', kwargs={'pk': self.id})
+
+	def __str__(self):
+		return "%s" % self.project.name
+	
 	# Class meta data
 	class Meta:
 		ordering = ['-created']

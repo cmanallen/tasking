@@ -45,9 +45,11 @@ Modular Classes -- Production
 .pad20 {padding:20px;}
 
 .hpad10 {padding-left:10px;padding-right:10px;}
+.hpad15 {padding-left:15px;padding-right:15px;}
 .hpad20 {padding-left:20px;padding-right:20px;}
 
 .vpad10 {padding-top:10px;padding-bottom:10px;}
+.vpad15 {padding-top:15px;padding-bottom:15px;}
 .vpad20 {padding-top:20px;padding-bottom:20px;}
 
 .mt5 {margin-top: 5px;}

@@ -17,7 +17,7 @@
 			{% if user.is_authenticated %}
 				
 				<!-- Header -->
-				<header class="col-md-1 fill" style="width:12%;padding:0;">
+				<header class="ftlt fill" style="width:200px;padding:0;">
 					
 					<!-- User Area -->
 					<div id="user-area" class="autoflow mb20 vpad20 hpad20" style="background:#162636;">
@@ -32,6 +32,9 @@
 							<a href="/users/update/{{ user.id }}" class="mr5">
 								<span class="glyphicon glyphicon-cog"></span>
 							</a>
+							<a href="#" class="mr5">
+								<span class="glyphicon glyphicon-envelope"></span>
+							</a>
 							<a href="/users/logout" class="mr5">
 								<span class="glyphicon glyphicon-log-out"></span>
 							</a>
@@ -40,7 +43,7 @@
 					
 					<!-- Navigation -->
 					<nav class="hpad20">
-						<p class="white">Browse</p>
+						<p class="white verysmall upper">Browse</p>
 						<ul class="list-unstyled">
 							<li><a href="/projects">Projects</a></li>
 							<li><a href="/tasks">Tasks</a></li>
@@ -51,7 +54,7 @@
 					
 					<!-- Quicklist -->
 					<nav class="hpad20">
-						<p class="white">Quick List</p>
+						<p class="white verysmall upper">Quick List</p>
 						<ul class="list-unstyled">
 							{% block quicklist %}
 							{% endblock %}
@@ -60,8 +63,15 @@
 				
 				</header>
 				
+				<!-- Secondary Information (Meta Data) -->
+				<aside class="ftrt hpad15 vpad20 fill" style="width:300px;">
+					{% block aside %}
+						<p>Test!</p>
+					{% endblock %}
+				</aside>
+
 				<!-- Content -->
-				<main class="col-md-9 fill autoflow" style="width:71.3333%;">
+				<main class="fill autoflow hpad15">
 					
 					<!-- Primary Information -->
 					<article>
@@ -77,14 +87,7 @@
 						{% endblock %}
 					</footer>	
 				
-				</main>
-				
-				<!-- Secondary Information (Meta Data) -->
-				<aside class="col-md-2 fill">
-					{% block aside %}
-						<p>Test!</p>
-					{% endblock %}
-				</aside>
+				</main>				
 			
 			{% else %}
 				

@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 from tasks.models import Task
+from tasks.forms import CreateTask
 
 # Tasks
 class ListTask(ListView):
@@ -14,6 +15,7 @@ class DetailTask(DetailView):
 class CreateTask(CreateView):
 	model = Task
 	template_name = 'manage_task.html'
+	form_class = CreateTask
 
 	def get_context_data(self, **kwargs):
 		context = super(CreateTask, self).get_context_data(**kwargs)

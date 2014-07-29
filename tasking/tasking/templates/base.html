@@ -26,14 +26,14 @@
 						</figure>
 						<div class="mt5">
 							<span class="white"><b>{{ user.first_name }} {{ user.last_name }}</b></span><br />
-							<a href="/users/profile/{{ user.id }}">
-								<img src="{% static 'images/person.png' %}" alt="View Profile">
+							<a href="/users/profile/{{ user.id }}" class="mr5">
+								<span class="glyphicon glyphicon-user"></span>
 							</a>
-							<a href="/users/update/{{ user.id }}">
-								<img src="{% static 'images/cog.png' %}" alt="Edit Profile">
+							<a href="/users/update/{{ user.id }}" class="mr5">
+								<span class="glyphicon glyphicon-cog"></span>
 							</a>
-							<a href="/users/logout">
-								<img src="{% static 'images/logout.png' %}" alt="Logout">
+							<a href="/users/logout" class="mr5">
+								<span class="glyphicon glyphicon-log-out"></span>
 							</a>
 						</div>
 					</div>
@@ -61,7 +61,7 @@
 				</header>
 				
 				<!-- Content -->
-				<main class="col-md-9 fill" style="width:71.3333%;">
+				<main class="col-md-9 fill autoflow" style="width:71.3333%;">
 					
 					<!-- Primary Information -->
 					<article>
@@ -115,7 +115,7 @@
 						<button type="submit">Register</button>
 					</div>
 				</form>
-				
+
 			{% endif %}
 			</div>
 		</div>

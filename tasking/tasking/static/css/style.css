@@ -99,6 +99,7 @@ Modular Classes -- Production
 
 .autoflow {overflow:auto;}
 .noneflow {overflow:none;}
+.scrollflow {overflow-x:hidden;overflow-y:auto;}
 
 /* Layout */
 .fill {height:100%;}

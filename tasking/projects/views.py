@@ -5,8 +5,14 @@ from projects.models import Project
 # Projects
 class ListProject(ListView):
 	model = Project
-	queryset = Project.with_tasks.all()
 	template_name = 'list_project.html'
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(ListProject, self).get_context_data(*args, **kwargs)
+		context['open_set'] = Project.with_tasks.filter(task__status=0)
+		context['closed_set'] = Project.with_tasks.filter(task__status=1)
+		context['locked_set'] = Project.with_tasks.filter(task__status=2)
+		return context
 
 class DetailProject(DetailView):
 	model = Project

@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import Count
+from django.core.urlresolvers import reverse
 from utils.models import TimeStamp
 from users.models import User
 
@@ -15,8 +16,12 @@ class Project(TimeStamp):
 	# Table Fields
 	name = models.CharField(max_length=255)
 	description = models.TextField()
-	# Model Methods
+	# Queries
 	with_tasks = TaskCount()
 	objects = models.Manager()
+	# Model Methods
+	def get_absolute_url(self):
+		return reverse('detail-project', kwargs={'pk': self.id})
+
 	def __str__(self):
 		return "%s" % self.name

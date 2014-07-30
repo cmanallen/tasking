@@ -5,6 +5,7 @@ from projects.models import Project
 # Projects
 class ListProject(ListView):
 	model = Project
+	queryset = Project.with_tasks.all()
 	template_name = 'list_project.html'
 
 class DetailProject(DetailView):

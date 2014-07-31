@@ -4,7 +4,11 @@ from users.models import User
 from utils.models import TimeStamp
 from projects.models import Project
 
-# Create your models here.
+
+class TaskManager(models.Manager):
+	def get_project_tasks(self, project_id):
+		return Task.objects.filter(project = project_id)
+
 class Task(TimeStamp):
 	# Choices
 	OPEN = 0
@@ -33,6 +37,9 @@ class Task(TimeStamp):
 	# Relations
 	user_task = models.ManyToManyField(User)
 	project = models.ForeignKey(Project, blank=True)
+
+	# Manager
+	objects = TaskManager()
 	
 	# Model methods
 	def get_task_comment(self):

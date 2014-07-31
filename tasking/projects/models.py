@@ -5,20 +5,25 @@ from utils.models import TimeStamp
 from users.models import User
 
 # Model Managers
-class TaskCount(models.Manager):
-	def get_query_set(self):
-		return super(TaskCount, self).get_query_set().annotate(tasks=Count('task'))
+class ProjectManager(models.Manager):
+	def project_tasks(self, **kwargs):
+		return self.filter(task__status=0)
+
+	# def get_query_set(self):
+	# 	return super(ProjectManager, self).get_query_set().annotate(tasks=Count('task'))
 
 # Create your models here.
 class Project(TimeStamp):
 	# Relations
 	created_by = models.ForeignKey(User)
+	
 	# Table Fields
 	name = models.CharField(max_length=255)
 	description = models.TextField()
-	# Queries
-	with_tasks = TaskCount()
-	objects = models.Manager()
+	
+	# Manager
+	objects = ProjectManager()
+	
 	# Model Methods
 	def get_absolute_url(self):
 		return reverse('detail-project', kwargs={'pk': self.id})

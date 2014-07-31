@@ -46,5 +46,7 @@ class DeleteTask(DeleteView):
 def task_comment(request):
 	if request.method == 'POST':
 		task = request.POST['task']
-		user = request.POST['user']
+		user = self.request.user
 		body = request.POST['body']
+
+		Comment.object.create(task = task, user = user, body = body)

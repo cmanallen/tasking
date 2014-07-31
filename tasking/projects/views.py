@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 from projects.models import Project
+from tasks.models import Task
 
 # Projects
 class ListProject(ListView):
@@ -9,14 +10,17 @@ class ListProject(ListView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(ListProject, self).get_context_data(*args, **kwargs)
-		context['open_set'] = Project.with_tasks.filter(task__status=0)
-		context['closed_set'] = Project.with_tasks.filter(task__status=1)
-		context['locked_set'] = Project.with_tasks.filter(task__status=2)
+		context['open_set'] = Project.objects.project_tasks().count()
 		return context
 
 class DetailProject(DetailView):
 	model = Project
 	template_name = 'detail_project.html'
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(DetailProject, self).get_context_data(*args, **kwargs)
+		context['task_set'] = Task.objects.get_project_tasks(self.get_object().id)
+		return context
 
 class CreateProject(CreateView):
 	model = Project

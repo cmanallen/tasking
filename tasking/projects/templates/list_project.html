@@ -13,23 +13,26 @@
 			<thead>
 				<tr>
 					<th>Project</th>
-					<th>Created By</th>
 					<th>Tasks</th>
-					<th>&nbsp;</th>
+					<th>Created</th>
+					<th>Created By</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for project in object_list %}
 				<tr>
 					<td><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></td>
-					<td>{{ project.created_by }}</td>
 					<td>{{ open_set }}</td>
-					<td>&nbsp;</td>
+					<td>{{ project.created }}</td>
+					<td>{{ project.created_by }}</td>
 				</tr>
 				{% endfor %}
 			</tbody>
 			<tfoot>
-				<!-- pagination? -->
+				<!-- pagination -->
+				<tr>
+					<td colspan="4">Table footer.</td>
+				</tr>
 			</tfoot>
 		</table>
 	{% else %}

@@ -3,21 +3,22 @@
 {% block article %}
 	<!-- Task Heading -->
 	<h2 class="inblock">{{ task.name }}</h2>
-	{% if user.is_authenticated %}
-		<a href="{% url "update-task" pk=task.id %}" class="ftrt mt20">
-			<button type="button" class="btn btn-primary">Update Task</button>
-		</a>
-	{% endif %}
+	<a href="{% url "update-task" pk=task.id %}" class="ftrt mt20">
+		<button type="button" class="btn btn-primary">Update Task</button>
+	</a>
 	<p>Created by <b>{{ task.created_by }}</b> on <i>{{ task.created }}</i></p>
 	<hr />
+	
 	<!-- Descriptions -->
 	<p class="serif mb20">{{ task.description }}</p>
 	<hr />
+	
 	<!-- Comments -->
 	<form action="{{ action }}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
 	</form>
 {% endblock %}
+
 {% block aside %}
 	<button type="button" class="btn btn-success">Assign User</button>
 	<h4 class="mt20">Assignment History</h4>

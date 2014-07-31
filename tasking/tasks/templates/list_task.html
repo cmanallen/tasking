@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block article %}
-	<div>
-		<h2 class="inblock">Task Pool</h2>
-		<a href="/tasks/create" class="ftrt mt20">
-			<button type="button" class="btn btn-primary">Create Task</button>
-		</a>
-	</div>
+	<!-- Heading -->
+	<h2 class="inblock">Task Pool</h2>
+	<a href="/tasks/create" class="ftrt mt20">
+		<button type="button" class="btn btn-primary">Create Task</button>
+	</a>
 	<hr />
+	
+	<!-- Global Task Listing -->
 	{% if object_list %}
 	<table class="table table-striped table-hover fluid">
 		<thead>
@@ -21,7 +22,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for task in object_list %}
+		{% for task in object_list %}
 			<tr>
 				<td><a href="{{ task.get_absolute_url }}">{{ task.name }}</a></td>
 				<td>{{ task.get_status_display }}</td>
@@ -30,10 +31,13 @@
 				<td><a href="/projects/{{ task.project.id }}">{{ task.project.name }}</a></td>
 				<td>{{ task.due }}</td>
 			</tr>
-			{% endfor %}
+		{% endfor %}
 		</tbody>
 		<tfoot>
 			<!-- pagination? -->
+			<tr>
+				<td colspan="6">Table Footer</td>
+			</tr>
 		</tfoot>
 	</table>
 	{% else %}

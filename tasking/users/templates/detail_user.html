@@ -7,4 +7,40 @@
 	{{ user.first }}
 	{{ user.last }}
 	{{ user.avatar }}
+
+	<hr />
+	{% if task_set %}
+	<table class="table table-striped table-hover fluid">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Status</th>
+				<th>Type</th>
+				<th>Due</th>
+				<th>Created By</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for task in task_set %}
+			<tr>
+				<td>
+					<a href="{{ task.get_absolute_url }}">{{ task.name }}</a>
+				</td>
+				<td>{{ task.get_status_display }}</td>
+				<td>{{ task.get_task_type_display }}</td>
+				<td>{{ task.due }}</td>
+				<td>{{ task.created_by }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+		<tfoot>
+			<!-- pagination -->
+			<tr>
+				<td colspan="5">Table Footer</td>
+			</tr>
+		</tfoot>
+	</table>
+	{% else %}
+	<p>There doesn't seem to be anything here.</p>
+	{% endif %}
 {% endblock %}

@@ -9,6 +9,9 @@ class TaskManager(models.Manager):
 	def get_project_tasks(self, project_id):
 		return Task.objects.filter(project = project_id)
 
+	def get_user_tasks(self, user_id):
+		return Task.objects.filter(user_task = user_id)
+
 class Task(TimeStamp):
 	# Choices
 	OPEN = 0

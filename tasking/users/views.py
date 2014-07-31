@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from users.models import User
 from users.forms import UserRegisterForm
+from tasks.models import Task
 
 # Class Based Views
 class ListUser(ListView):
@@ -15,6 +16,11 @@ class ListUser(ListView):
 class DetailUser(DetailView):
     model = User
     template_name = 'detail_user.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DetailUser, self).get_context_data(*args, **kwargs)
+        context['task_set'] = Task.objects.get_user_tasks(self.get_object().id)
+        return context
 
 class UpdateUser(UpdateView):
     model = User

@@ -20,11 +20,7 @@ class Task(TimeStamp):
 	TYPE_CHOICES = (
 		(BUG, 'Issue'),
 		(FEATURE, 'Request'),
-	)
-	
-	# Relations
-	user_task = models.ManyToManyField(User, through='UserTask')
-	project = models.ForeignKey(Project, blank=True)
+	)	
 	
 	# Table Fields
 	name = models.CharField(max_length=255)
@@ -33,6 +29,10 @@ class Task(TimeStamp):
 	task_type = models.IntegerField(choices=TYPE_CHOICES)
 	due = models.DateField()
 	created_by = models.ForeignKey(User, related_name='creator')
+	
+	# Relations
+	user_task = models.ManyToManyField(User)
+	project = models.ForeignKey(Project, blank=True)
 	
 	# Model methods
 	def get_task_comment(self):
@@ -51,21 +51,15 @@ class Task(TimeStamp):
 	class Meta:
 		ordering = ['-created']
 
-class UserTask(TimeStamp):
-	# Relations
-	user = models.ForeignKey(User, blank=True, null=True)
-	task = models.ForeignKey(Task, blank=True, null=True)
-	# Table Fields
-	reassigned = models.DateField(null=True, blank=True)
-	completed = models.DateField(null=True, blank=True)
-	removed = models.DateField(null=True, blank=True)
-
 class Comment(TimeStamp):
 	# Relations
 	task = models.ForeignKey(Task)
 	user = models.ForeignKey(User)
 	# Table Fields
 	body = models.TextField()
+
+	def __str__(self):
+		return self.body
 
 class Image(TimeStamp):
 	# Relations

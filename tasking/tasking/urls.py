@@ -26,6 +26,8 @@ urlpatterns = patterns('',
     	name='update-task'),
     url(r'^tasks/delete/(?P<pk>\d+)/$', tasks.views.DeleteTask.as_view(),
     	name='delete-task'),
+    url(r'^tasks/comment/create/$', tasks.views.CreateComment.as_view(),
+        name='create-comment'),
     # Projects
     url(r'^projects/$', projects.views.ListProject.as_view(),
         name='list-project'),

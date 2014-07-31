@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
 from tasks.models import Task, Comment
-from tasks.forms import TaskForm
+from tasks.forms import TaskForm, TaskCommentForm
 
 # Tasks
 class ListTask(ListView):
@@ -21,9 +21,6 @@ class CreateTask(CreateView):
 		context = super(CreateTask, self).get_context_data(**kwargs)
 		context['action'] = reverse('create-task')
 		return context
-
-	def get_success_url(self):
-		return reverse('list-task')
 
 class UpdateTask(UpdateView):
 	model = Task
@@ -46,14 +43,8 @@ class DeleteTask(DeleteView):
 		return reverse('list-task')
 
 # Comments
-class CreateComment(CreateView):
-	model = Comment
-	template_name = 'detail_task.html'
-
-	def get_context_data(self, **kwargs):
-		context = super(CreateComment, self).get_context_data(**kwargs)
-		context['action'] = reverse('create-comment')
-		return context
-
-	def get_success_url(self, **kwargs):
-		return reverse('detail-task', kwargs={'pk': self.get_object().id})
+def task_comment(request):
+	if request.method == 'POST':
+		task = request.POST['task']
+		user = request.POST['user']
+		body = request.POST['body']

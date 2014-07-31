@@ -1,6 +1,6 @@
 A free and open source Django task management system.
 
-![alt text](https://github.com/cmanallen/tasking/example.png "Tasking Image Preview")
+![alt text](https://github.com/cmanallen/tasking/raw/master/example.png "Tasking Image Preview")
 
 Overview
 --------

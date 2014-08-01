@@ -22,7 +22,7 @@
 				{% for project in object_list %}
 				<tr>
 					<td><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></td>
-					<td>{{ open_set }}</td>
+					<td>{{ project.tasks }}</td>
 					<td>{{ project.created }}</td>
 					<td>{{ project.created_by }}</td>
 				</tr>

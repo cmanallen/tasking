@@ -10,7 +10,6 @@ class ListProject(ListView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(ListProject, self).get_context_data(*args, **kwargs)
-		context['open_set'] = Project.objects.project_tasks().count()
 		return context
 
 class DetailProject(DetailView):

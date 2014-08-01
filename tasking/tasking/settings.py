@@ -37,11 +37,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'endless_pagination',
     'projects',
     'south',
     'tasks',
     'users',
     'utils',
+    'teams',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -98,7 +100,11 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# Template root
+# Templates
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+)
 TEMPLATE_DIRS = (
     'tasking/templates',
 )

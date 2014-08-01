@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from users.models import User
 from utils.models import TimeStamp
 from projects.models import Project
+from teams.models import Team
 
 
 class TaskManager(models.Manager):
@@ -11,6 +12,9 @@ class TaskManager(models.Manager):
 
 	def get_user_tasks(self, user_id):
 		return Task.objects.filter(user_task = user_id)
+
+	def get_team_tasks(self, team_id):
+		return Task.objects.filter(team = team_id)
 
 class Task(TimeStamp):
 	# Choices
@@ -39,7 +43,8 @@ class Task(TimeStamp):
 	
 	# Relations
 	user_task = models.ManyToManyField(User)
-	project = models.ForeignKey(Project, blank=True)
+	project = models.ForeignKey(Project, null=True, blank=True, default=None)
+	team = models.ForeignKey(Team, null=True, blank=True, default=None)
 
 	# Manager
 	objects = TaskManager()

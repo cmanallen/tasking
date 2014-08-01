@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block article %}
+	<div class="block autoflow">
+		<h2 class="inblock">Teams</h2>
+		<a href="/teams/create" class="ftrt mt20">
+			<button type="text" class="btn btn-primary">Create Team</button>
+		</a>
+	</div>
+	<hr />
+	{% if object_list %}
+		<table class="table table-striped table-hover fluid">
+			<thead>
+				<tr>
+					<th>Team</th>
+					<th>Created</th>
+					<th>Users</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for team in object_list %}
+				<tr>
+					<td><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></td>
+					<td>{{ team.created }}</td>
+					<td>{{ team.users }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<!-- pagination? -->
+				<tr>
+					<td colspan="3">Table footer.</td>
+				</tr>
+			</tfoot>
+		</table>
+	{% else %}
+		<p>There doesn't seem to be anything here!</p>
+	{% endif %}
+{% endblock %}

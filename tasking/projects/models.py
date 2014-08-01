@@ -6,20 +6,17 @@ from users.models import User
 
 # Model Managers
 class ProjectManager(models.Manager):
-	def project_tasks(self, **kwargs):
-		return self.filter(task__status=0)
-
-	# def get_query_set(self):
-	# 	return super(ProjectManager, self).get_query_set().annotate(tasks=Count('task'))
+	def get_query_set(self):
+		return super(ProjectManager, self).get_query_set().annotate(tasks=Count('task'))
 
 # Create your models here.
 class Project(TimeStamp):
-	# Relations
-	created_by = models.ForeignKey(User)
-	
 	# Table Fields
 	name = models.CharField(max_length=255)
 	description = models.TextField()
+	
+	# Relations
+	created_by = models.ForeignKey(User)
 	
 	# Manager
 	objects = ProjectManager()

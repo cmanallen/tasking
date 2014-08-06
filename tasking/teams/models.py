@@ -1,7 +1,9 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from utils.models import TimeStamp
-from users.models import User
+
+from django.conf import settings
+AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
 # Create your models here.
 class Team(TimeStamp):
@@ -10,7 +12,7 @@ class Team(TimeStamp):
 	description = models.TextField()
 
 	# Relations
-	user_team = models.ManyToManyField(User)
+	user_team = models.ManyToManyField(AUTH_USER_MODEL)
 
 	# Model Methods
 	def get_absolute_url(self):

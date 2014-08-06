@@ -3,3 +3,4 @@ South==0.8.4
 Pillow==2.4
 django-debug-toolbar
 django-endless-pagination==2.0
+django-messages==0.5.1

@@ -1,10 +1,11 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-from users.models import User
 from utils.models import TimeStamp
 from projects.models import Project
 from teams.models import Team
 
+from django.conf import settings
+AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
 class TaskManager(models.Manager):
 	def get_project_tasks(self, project_id):
@@ -39,10 +40,10 @@ class Task(TimeStamp):
 	status = models.IntegerField(choices=STATUS_CHOICES)
 	task_type = models.IntegerField(choices=TYPE_CHOICES)
 	due = models.DateField()
-	created_by = models.ForeignKey(User, related_name='creator')
+	created_by = models.ForeignKey(AUTH_USER_MODEL, related_name='creator')
 	
 	# Relations
-	user_task = models.ManyToManyField(User)
+	user_task = models.ManyToManyField(AUTH_USER_MODEL)
 	project = models.ForeignKey(Project, null=True, blank=True, default=None)
 	team = models.ForeignKey(Team, null=True, blank=True, default=None)
 
@@ -69,7 +70,7 @@ class Task(TimeStamp):
 class Comment(TimeStamp):
 	# Relations
 	task = models.ForeignKey(Task)
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(AUTH_USER_MODEL)
 	# Table Fields
 	body = models.TextField()
 

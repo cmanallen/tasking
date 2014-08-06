@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^messages/', include('django_messages.urls')),
     # Tasks
     url(r'^tasks/$', tasks.views.ListTask.as_view(),
     	name='list-task'),

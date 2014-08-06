@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block article %}
+	<h2>{% trans "Compose Message"%}</h2>
+	<hr />
+	<form action="" method="post">
+		{% csrf_token %}
+		{% for field in form %}
+			<h4>{{ field.label }}</h4>
+			{{ field }}
+		{% endfor %}
+		<button type="submit" class="block mt20 btn btn-primary">Send Message</button>
+	</form>
+{% endblock %}

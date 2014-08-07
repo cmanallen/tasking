@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load endless %}
 
 {% block article %}
 	<!-- Project Heading -->
@@ -26,6 +27,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		{% paginate task_set %}
 		{% for task in task_set %}
 			<tr>
 				<td><a href="{{ task.get_absolute_url }}">{{ task.name }}</a></td>
@@ -39,7 +41,7 @@
 		<tfoot>
 			<!-- pagination -->
 			<tr>
-				<td colspan="5">Table footer.</td>
+				<td colspan="5">{% show_pages %}</td>
 			</tr>
 		</tfoot>
 	</table>

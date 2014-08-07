@@ -192,3 +192,13 @@ aside {
 	margin-top:-200px;
 
 }
+
+a.endless_page_link {
+	border:1px solid #c0c0c0;
+	border-radius:3px;
+	padding:3px 5px;
+	background:#f7f7f7;
+}
+a.endless_page_link:hover {
+	background:white;
+}

@@ -23,8 +23,6 @@
 		{% for field in form %}
 			<h4>{{ field.label }}</h4>
 			{{ field }}
-			<br />
-			<br />
 		{% endfor %}
 		<br />
 		{% if task.id %}
@@ -33,5 +31,4 @@
 			<input type="submit" value="Create" class="btn btn-primary">
 		{% endif %}
 	</form>
-
 {% endblock %}

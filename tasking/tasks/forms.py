@@ -4,7 +4,7 @@ from tasks.models import Task, Comment
 class TaskForm(forms.ModelForm):
 	class Meta:
 		model = Task
-		fields = ('project', 'name', 'status', 'task_type', 'description', 'due', 'created_by')
+		fields = ('project', 'name', 'priority', 'task_type', 'description', 'due', 'created_by')
 
 class TaskCommentForm(forms.ModelForm):
 	class Meta:

@@ -32,12 +32,23 @@ class Task(TimeStamp):
 	TYPE_CHOICES = (
 		(BUG, 'Issue'),
 		(FEATURE, 'Request'),
-	)	
+	)
+	LOW = 0
+	NORMAL = 1
+	HIGH = 2
+	CRITICAL = 3
+	PRIORITY_CHOICES = (
+		(LOW, 'Low'),
+		(NORMAL, 'Normal'),
+		(HIGH, 'High'),
+		(CRITICAL, 'Critical'),
+	)
 	
 	# Table Fields
 	name = models.CharField(max_length=255)
 	description = models.TextField()
-	status = models.IntegerField(choices=STATUS_CHOICES)
+	status = models.IntegerField(choices=STATUS_CHOICES, default=0)
+	priority = models.IntegerField(choices=PRIORITY_CHOICES, default=1)
 	task_type = models.IntegerField(choices=TYPE_CHOICES)
 	due = models.DateField()
 	created_by = models.ForeignKey(AUTH_USER_MODEL, related_name='creator')

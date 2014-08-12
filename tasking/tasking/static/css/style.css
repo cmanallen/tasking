@@ -192,19 +192,3 @@ aside {
 	margin-top:-200px;
 
 }
-
-#pagination:first-child {
-	border-radius:3px 3px 0 0;
-}
-#pagination:last-child {
-	border-radius:0 0 3px 3px;
-}
-
-a.endless_page_link, .endless_page_current {
-	border:1px solid #c0c0c0;
-	padding:0;
-	margin:0;
-}
-a.endless_page_link:hover {
-	background:#c0c0c0;
-}

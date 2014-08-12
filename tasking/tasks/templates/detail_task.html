@@ -10,7 +10,7 @@
 	<hr />
 	
 	<!-- Descriptions -->
-	<p class="serif mb20">{{ task.description }}</p>
+	<p class="serif mb20">{{ task.description|safe }}</p>
 	<hr />
 	
 	<!-- Comments -->
@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block aside %}
-	<button type="button" class="btn btn-success">Assign User</button>
+	<button type="button" class="btn btn-success">Suggest User</button>
 	<h4 class="mt20">Assignment History</h4>
 	<h4>Related Tasks</h4>
 {% endblock %}

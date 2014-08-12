@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'endless_pagination',
     'django_messages',
+    'django_wysiwyg',
     'projects',
     'south',
     'tasks',

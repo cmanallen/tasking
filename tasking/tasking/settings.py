@@ -110,6 +110,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 TEMPLATE_DIRS = (
     'tasking/templates',
     'tasking/templates/messages',
+    'tasking/endless_pagination/templates/endless',
 )
 
 # User Profiles

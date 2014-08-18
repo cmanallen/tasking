@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block article %}
 	{% if task.id %}
 		
@@ -18,7 +19,7 @@
 	{% endif %}
 	
 	<hr />	
-	<form action="{{ action }}" method="POST" enctype="multipart/form-data">
+	<form action="{{ action }}" method="POST" enctype="multipart/form-data" role="form">
 		{% csrf_token %}
 		{% for field in form %}
 			<h4>{{ field.label }}</h4>

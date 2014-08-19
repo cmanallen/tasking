@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block article %}
+	<!-- Team Heading -->
+	<h2 class="inblock">{{ team.name }}</h2>
+	<a href="{% url "update-team" pk=team.id %}" class="ftrt mt20">
+		<button type="button" class="btn btn-primary">Update Team</button>
+	</a>
+	<p>Created by <b>{{ team.created_by }}</b> on <i>{{ team.created }}</i></p>
+	<hr />
+	
+	<!-- Descriptions -->
+	<p class="serif mb20">{{ team.description|safe }}</p>
+	<hr />
+{% endblock %}
+
+{% block aside %}
+	<button type="button" class="btn btn-success">Suggest User</button>
+	<h4 class="mt20">Assignment History</h4>
+	<h4>Related Tasks</h4>
+{% endblock %}

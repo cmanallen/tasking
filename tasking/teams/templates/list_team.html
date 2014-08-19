@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load endless %}
 
 {% block article %}
 	<div class="block autoflow">
@@ -18,6 +19,7 @@
 				</tr>
 			</thead>
 			<tbody>
+				{% paginate object_list %}
 				{% for team in object_list %}
 				<tr>
 					<td><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></td>
@@ -29,7 +31,7 @@
 			<tfoot>
 				<!-- pagination? -->
 				<tr>
-					<td colspan="3">Table footer.</td>
+					<td colspan="3">{% show_pages %}</td>
 				</tr>
 			</tfoot>
 		</table>

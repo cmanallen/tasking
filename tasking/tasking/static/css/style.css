@@ -193,3 +193,10 @@ aside {
 	margin-top:-200px;
 
 }
+
+input, textarea {
+	background:white;
+	border:1px solid #c0c0c0;
+	border-radius:3px;
+	padding:2px;
+}

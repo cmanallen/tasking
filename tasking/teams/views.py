@@ -8,10 +8,6 @@ class ListTeam(ListView):
 	model = Team
 	template_name = 'list_team.html'
 
-	def get_context_data(self, *args, **kwargs):
-		context = super(ListTeam, self).get_context_data(*args, **kwargs)
-		return context
-
 class DetailTeam(DetailView):
 	model = Team
 	template_name = 'detail_team.html'

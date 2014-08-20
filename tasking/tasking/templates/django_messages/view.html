@@ -4,7 +4,7 @@
 
 {% block article %}
 	<h2 class="inblock">{% trans message.subject %}</h2>
-	
+
 	{% ifequal message.recipient.pk user.pk %}
 		<a href="{% url 'messages_reply' message.id %}" class="ftrt mt20">
 			<button class="btn btn-primary">{% trans "Reply" %}</button>
@@ -15,7 +15,6 @@
 	</a>
 
 	<p>Created by <b>{{ message.sender }}</b> on <i>{{ message.sent_at }}</i></p>
-	
 	<hr />
 
 	<p>{{ message.body|linebreaksbr }}</p>

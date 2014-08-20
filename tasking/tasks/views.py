@@ -29,7 +29,9 @@ class UpdateTask(UpdateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(UpdateTask, self).get_context_data(**kwargs)
-		context['action'] = reverse('update-task', kwargs={'pk': self.get_object().id})
+		context['action'] = reverse('update-task', kwargs={
+			'pk': self.get_object().id,
+		})
 		return context
 
 	def get_success_url(self):

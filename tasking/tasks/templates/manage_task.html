@@ -1,24 +1,18 @@
 {% extends 'base.html' %}
 
-
 {% block article %}
 	{% if task.id %}
-		
 		<h2 class="inblock">Update Task</h2>
-		
 		<!-- Delete Task -->
 		<form action="{% url "delete-task" pk=task.id %}" method="POST" class="ftrt mt20">
 			{% csrf_token %}
 			<button type="submit" value="Yes, delete." class="btn btn-danger">Delete</button>
 		</form>
-
 	{% else %}
-		
 		<h2 class="inblock">Create Task</h2>
-
 	{% endif %}
-	
-	<hr />	
+
+	<hr />
 	<form action="{{ action }}" method="POST" enctype="multipart/form-data" role="form">
 		{% csrf_token %}
 		{% for field in form %}

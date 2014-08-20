@@ -8,11 +8,11 @@
 	</a>
 	<p>Created by <b>{{ task.created_by }}</b> on <i>{{ task.created }}</i></p>
 	<hr />
-	
+
 	<!-- Descriptions -->
 	<p class="serif mb20">{{ task.description|safe }}</p>
 	<hr />
-	
+
 	<!-- Comments -->
 	<form action="{{ action }}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
@@ -20,7 +20,8 @@
 {% endblock %}
 
 {% block aside %}
-	<button type="button" class="btn btn-success">Suggest User</button>
+	<button type="button" class="btn btn-success">Work Task</button> |
+	<button type="button" class="btn btn-primary">Suggest User</button>
 	<h4 class="mt20">Assignment History</h4>
 	<h4>Related Tasks</h4>
 {% endblock %}

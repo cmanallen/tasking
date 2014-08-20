@@ -19,10 +19,10 @@
 		<div class="row">
 			<div class="wrapper">
 			{% if user.is_authenticated %}
-				
+
 				<!-- Header -->
 				<header class="ftlt fill" style="width:200px;padding:0;">
-					
+
 					<!-- User Area -->
 					<div id="user-area" class="autoflow mb20 vpad20 hpad20" style="background:#162636;">
 						<figure class="ftlt mr10">
@@ -44,7 +44,7 @@
 							</a>
 						</div>
 					</div>
-					
+
 					<!-- Navigation -->
 					<nav class="hpad20">
 						<p class="white verysmall upper">Browse</p>
@@ -55,7 +55,7 @@
 							<li><a href="/teams">Teams</a></li>
 						</ul>
 					</nav>
-					
+
 					<!-- Quicklist -->
 					<nav class="hpad20">
 						<p class="white verysmall upper">Quick List</p>
@@ -64,9 +64,9 @@
 							{% endblock %}
 						</ul>
 					</nav>
-				
+
 				</header>
-				
+
 				<!-- Secondary Information (Meta Data) -->
 				<aside class="ftrt hpad15 vpad20 fill" style="width:300px;">
 					{% block aside %}
@@ -76,26 +76,26 @@
 
 				<!-- Content -->
 				<main class="fill autoflow hpad15">
-					
+
 					<!-- Primary Information -->
 					<article>
 						{% block article %}
 						{% endblock %}
 					</article>
-					
+
 					<!-- Footer -->
 					<footer>
 						<!-- Sitemap -->
 						<!-- Return to top -->
 						{% block footer %}
 						{% endblock %}
-					</footer>	
-				
+					</footer>
+
 				</main>
-				{% wysiwyg_editor "id_description" %}	
-			
+				{% wysiwyg_editor "id_description" %}
+
 			{% else %}
-				
+
 				<!--  -->
 				<h2>Log In</h2>
 				<form action="/users/login" method="POST">
@@ -108,7 +108,7 @@
 						<button type="submit">Log in</button>
 					</div>
 				</form>
-				
+
 				<!--  -->
 				<h2>Register</h2>
 				<form action="/users/create" method="POST">

@@ -45,10 +45,12 @@ Modular Classes -- Production
 .pad10 {padding:10px;}
 .pad20 {padding:20px;}
 
+.hpad5 {padding-left:5px;padding-right:5px;}
 .hpad10 {padding-left:10px;padding-right:10px;}
 .hpad15 {padding-left:15px;padding-right:15px;}
 .hpad20 {padding-left:20px;padding-right:20px;}
 
+.vpad5 {padding-top:5px;padding-bottom:5px;}
 .vpad10 {padding-top:10px;padding-bottom:10px;}
 .vpad15 {padding-top:15px;padding-bottom:15px;}
 .vpad20 {padding-top:20px;padding-bottom:20px;}
@@ -57,24 +59,28 @@ Modular Classes -- Production
 .mt10 {margin-top: 10px;}
 .mt15 {margin-top: 15px;}
 .mt20 {margin-top: 20px;}
+
 .mt5m {margin-top: -5px;}
 
 .mr5 {margin-right: 5px;}
 .mr10 {margin-right: 10px;}
 .mr15 {margin-right: 15px;}
 .mr20 {margin-right: 20px;}
+
 .mr5m {margin-right: -5px;}
 
 .mb5 {margin-bottom: 5px;}
 .mb10 {margin-bottom: 10px;}
 .mb15 {margin-bottom: 15px;}
 .mb20 {margin-bottom: 20px;}
+
 .mb5m {margin-bottom: -5px;}
 
 .ml5 {margin-left: 5px;}
 .ml10 {margin-left: 10px;}
 .ml15 {margin-left: 15px;}
 .ml20 {margin-left: 20px;}
+
 .ml5m {margin-left: -5px;}
 
 
@@ -198,5 +204,5 @@ input, textarea {
 	background:white;
 	border:1px solid #c0c0c0;
 	border-radius:3px;
-	padding:2px;
+	padding:4px;
 }

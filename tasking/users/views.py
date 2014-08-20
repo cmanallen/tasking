@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth import authenticate, login, logout
 from users.models import User
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, UserUpdateForm
 from tasks.models import Task
 
 # Class Based Views
@@ -25,6 +25,7 @@ class DetailUser(DetailView):
 class UpdateUser(UpdateView):
     model = User
     template_name = 'manage_user.html'
+    form_class = UserUpdateForm
 
 class DeleteUser(DeleteView):
     model = User

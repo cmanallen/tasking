@@ -24,3 +24,13 @@ class UserUpdateForm(forms.ModelForm):
 			'last_name',
 			'avatar',
 		)
+
+class UserChangePasswordForm(forms.ModelForm):
+	def save(self):
+		user = super(UserChangePasswordForm, self).save()
+		user.set_password(self.cleaned_data['new_password'])
+		user.save()
+		return user
+
+	class Meta:
+		model = User

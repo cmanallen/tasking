@@ -2,6 +2,7 @@
 {% load endless %}
 
 {% block article %}
+	<!-- Heading -->
 	<div class="block autoflow">
 		<h2 class="inblock">Teams</h2>
 		<a href="/teams/create" class="ftrt mt20">
@@ -9,6 +10,8 @@
 		</a>
 	</div>
 	<hr />
+
+	<!-- Team Listing -->
 	{% if object_list %}
 		<table class="table table-striped table-hover fluid">
 			<thead>
@@ -31,7 +34,7 @@
 			<tfoot>
 				<!-- pagination? -->
 				<tr>
-					<td colspan="3">{% show_pages %}</td>
+					<td colspan="3" class="pad0"><ul class="pagination pagination-sm">{% show_pages %}</ul></td>
 				</tr>
 			</tfoot>
 		</table>

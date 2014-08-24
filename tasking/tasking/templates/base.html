@@ -96,7 +96,7 @@
 
 			{% else %}
 
-				<!--  -->
+				<!-- Login -->
 				<h2>Log In</h2>
 				<form action="/users/login" method="POST">
 					{% csrf_token %}
@@ -109,7 +109,7 @@
 					</div>
 				</form>
 
-				<!--  -->
+				<!-- Register -->
 				<h2>Register</h2>
 				<form action="/users/create" method="POST">
 					{% csrf_token %}
@@ -130,7 +130,7 @@
 	</div>
 	<!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="{% static 'lib/datepicker/js/bootstrap-datepicker.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'lib/datepicker/js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth import authenticate, login, logout
 from users.models import User
-from users.forms import UserRegisterForm, UserUpdateForm
+from users.forms import UserRegisterForm, UserUpdateForm, UserChangePasswordForm
 from tasks.models import Task
 
 # Class Based Views
@@ -62,6 +62,7 @@ def user_login(request):
                 return HttpResponse("Wrong username/password")
     return HttpResponseRedirect('/')
 
+# Logout
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')

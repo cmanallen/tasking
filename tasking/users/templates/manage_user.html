@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 
 {% block article %}
+	<!-- Heading -->
 	<h2 class="inblock">Update User</h2>
-	<button class="ftrt mt20 btn btn-primary">Change Password</button>
+	<a href="#password" class="pop-up-controller">
+		<button class="ftrt mt20 btn btn-primary">Change Password</button>
+	</a>
 	<hr />
+
+	<!-- User Update Form -->
 	<form action="{{ action }}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
 		{% for field in form %}
@@ -13,4 +18,23 @@
 		<br />
 		<input type="submit" value="Update" class="btn btn-primary">
 	</form>
+
+	<!-- Change Password Form -->
+	<div id="password" class="abs pop-up">
+		<div class="fixed-center pop-up-container">
+			<h3 class="abs white pop-up-head center shadow hpad20">Change Password</h3>
+			<form action="/users/change_password/" method="POST" class="abs pop-up-body">
+				{% csrf_token %}
+				<h4 class="mt0">Current Password</h4>
+				<input type="password" name="id_old_password" class="fluid">
+				<h4>New Password</h4>
+				<input type="password" name="id_new_password1" class="fluid">
+				<h4>Repeat Password</h4>
+				<input type="password" name="id_new_password2" class="fluid">
+				<!-- Submit -->
+				<button type="submit" class="mt15 btn btn-primary">Update Password</button>
+				<a class="pop-up-controller mt15 btn" href="#password">Close</a>
+			</form>
+		</div>
+	</div>
 {% endblock %}

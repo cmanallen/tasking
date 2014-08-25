@@ -215,6 +215,7 @@ input, textarea {
 
 .bubble-user {
 	background:rgb(70, 207, 95);
+	border-bottom:2px solid rgb(54, 181, 71);
 	border-radius:3px;
 	padding:5px;
 	color:white;
@@ -223,6 +224,7 @@ input, textarea {
 
 .bubble-other {
 	background:rgb(90, 134, 230);
+	border-bottom:2px solid rgb(63, 114, 194);
 	border-radius:3px;
 	padding:5px;
 	color:white;

@@ -18,7 +18,7 @@
 				<tr>
 					<th>Username</th>
 					<th>Email</th>
-					<th>Something</th>
+					<th>Tasks</th>
 					<th>Something</th>
 				</tr>
 			</thead>
@@ -28,7 +28,7 @@
 				<tr>
 					<td><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></td>
 					<td>{{ user.email }}</td>
-					<td>&nbsp;</td>
+					<td>{{ user.tasks }}</td>
 					<td>&nbsp;</td>
 				</tr>
 				{% endfor %}

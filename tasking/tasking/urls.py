@@ -30,6 +30,9 @@ urlpatterns = patterns('',
     # Tasks Comments
     url(r'^tasks/comments/create', tasks.views.create_comment,
       name='create-task-comment'),
+    # Tasks Attachments
+    url(r'^tasks/attachments/create', tasks.views.create_attachment,
+      name='create-task-attachment'),
     # Projects
     url(r'^projects/$', projects.views.ListProject.as_view(),
         name='list-project'),

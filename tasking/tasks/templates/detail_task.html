@@ -11,15 +11,20 @@
 	<hr />
 	<p class="serif mb20">{{ task.description|safe }}</p>
 	<!-- Attachments -->
-	<hr />
-	<a href="#">
-		<button class="btn btn-success">Attach Files</button>
-	</a>
 	{% if attachments %}
+		<ul class="list-unstyled autoflow mb20">
+			<li class="ftlt btn disabled"><span class="glyphicon glyphicon-file"></span></li>
 		{% for attachment in attachments %}
-			{{ attachment }}
+			<li class="ftlt btn btn-default mr10 mb10"><a href="{{ attachment.file.url }}">{{ attachment }}</a></li>
 		{% endfor %}
+		</ul>
 	{% endif %}
+	<form action="{% url 'create-task-attachment' %}" method="POST" enctype="multipart/form-data" class="upload inblock rad3 pad10">
+		{% csrf_token %}
+		<input type="hidden" name="task" value="{{ task.id }}">
+		<input type="file" name="file" value="">
+		<button type="submit" class="btn btn-primary mt10">Upload</button>
+	</form>
 {% endblock %}
 
 {% block aside %}

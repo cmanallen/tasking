@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from tasks.models import Task, Comment, Attachment
-from tasks.forms import TaskForm, TaskCommentForm
+from tasks.forms import TaskForm, TaskCommentForm, TaskAttachmentForm
 
 # Tasks
 class ListTask(ListView):
@@ -17,7 +17,6 @@ class DetailTask(DetailView):
 		context = super(DetailTask, self).get_context_data(*args, **kwargs)
 		context['comments'] = Comment.objects.filter(task=self.get_object().id)
 		context['attachments'] = Attachment.objects.filter(task=self.get_object().id)
-		context['comment_form'] = TaskCommentForm
 		return context
 
 class CreateTask(CreateView):
@@ -61,3 +60,14 @@ def create_comment(request):
 			return HttpResponseRedirect('/tasks/%s' % request.POST['task'])
 		else:
 			return HttpResponseRedirect('/')
+
+def create_attachment(request):
+	if request.method == 'POST':
+		post_values = request.POST.copy()
+		post_values['user'] = request.user.id
+		form = TaskAttachmentForm(post_values)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/tasks/%s' % post_values['task'])
+		else:
+			return HttpResponseRedirect('/tasks/%s' % post_values['task'])

@@ -1,5 +1,5 @@
 from django import forms
-from tasks.models import Task, Comment
+from tasks.models import Task, Comment, Attachment
 
 class TaskForm(forms.ModelForm):
 	due = forms.DateField(widget=forms.TextInput(
@@ -17,3 +17,8 @@ class TaskCommentForm(forms.ModelForm):
 	class Meta:
 		model = Comment
 		fields = ('body', 'task', 'user')
+
+class TaskAttachmentForm(forms.ModelForm):
+	class Meta:
+		model = Attachment
+		fields = ('file', 'user', 'task')

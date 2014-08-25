@@ -2,10 +2,11 @@
 Modular Classes -- Production
 **/
 
-/* Color Scheme & Patterns */
-.lightgray {background-color:#f7f7f7;}
-.darkgray {background-color: #333;}
-.diamond {background-image: url(../images/pattern.png);}
+/* General */
+.pointer {cursor:pointer;}
+
+/* Transparency */
+.opacity-half {opacity:0.5;}
 
 /* Text */
 .verysmall {font-size:.8em;}
@@ -229,4 +230,14 @@ input, textarea {
 	padding:5px;
 	color:white;
 	margin-right:60px;
+}
+
+.upload {
+	background:rgb(240, 240, 240);
+	border:1px solid rgb(215, 215, 215);
+}
+
+.upload input {
+	background:rgb(215, 215, 215);
+	border:1px solid rgb(199, 199, 199);
 }

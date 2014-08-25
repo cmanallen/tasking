@@ -1,0 +1,24 @@
+Flask Reading
+
+<!-- USE PYTHON 2 -->
+
+/**
+* Setting up the environment:
+**/
+
+http://www.jeffknupp.com/blog/2012/02/09/starting-a-django-project-the-right-way/
+Replace Django with Flask.
+
+/**
+* Further Reading:
+**/
+
+http://flask.pocoo.org/docs/installation/
+
+http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+
+http://stackoverflow.com/questions/15041861/flask-tutorial-for-beginner-python-programmers
+
+http://net.tutsplus.com/tutorials/python-tutorials/an-introduction-to-pythons-flask-framework/
+
+http://www.realpython.com/blog/python/python-web-applications-with-flask-part-i/#.UtCj8ZV3R0w

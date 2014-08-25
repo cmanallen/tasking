@@ -73,6 +73,7 @@ class Image(TimeStamp):
 class Attachment(TimeStamp):
 	# Relations
 	task = models.ForeignKey(Task)
+	user = models.ForeignKey(AUTH_USER_MODEL)
 	# Fields
 	file = models.FileField(upload_to='attachments/')
 	# Methods

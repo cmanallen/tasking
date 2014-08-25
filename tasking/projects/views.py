@@ -18,7 +18,7 @@ class DetailProject(DetailView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(DetailProject, self).get_context_data(*args, **kwargs)
-		context['task_set'] = Task.objects.get_project_tasks(self.get_object().id)
+		context['task_set'] = Task.objects.filter(project_id=self.get_object().id)
 		return context
 
 class CreateProject(CreateView):

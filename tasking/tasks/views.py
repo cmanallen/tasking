@@ -12,6 +12,11 @@ class DetailTask(DetailView):
 	model = Task
 	template_name = 'detail_task.html'
 
+	def get_context_data(self, *args, **kwargs):
+		context = super(DetailTask, self).get_context_data(*args, **kwargs)
+		context['comments'] = Comment.objects.filter(task=self.get_object().id)
+		return context
+
 class CreateTask(CreateView):
 	model = Task
 	template_name = 'manage_task.html'
@@ -44,11 +49,5 @@ class DeleteTask(DeleteView):
 	def get_success_url(self):
 		return reverse('list-task')
 
-# Comments
-def task_comment(request):
-	if request.method == 'POST':
-		task = request.POST['task']
-		user = self.request.user
-		body = request.POST['body']
-
-		Comment.object.create(task = task, user = user, body = body)
+class CreateComment(CreateView):
+	model = Comment

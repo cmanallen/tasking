@@ -210,3 +210,19 @@ input, textarea {
 	border-radius:3px;
 	padding:4px;
 }
+
+.bubble-user {
+	background:#a2a2a2;
+	border-radius:3px;
+	padding:5px;
+	color:white;
+	margin-left:60px;
+}
+
+.bubble-other {
+	background:#a2a2a2;
+	border-radius:3px;
+	padding:5px;
+	color:white;
+	margin-right:60px;
+}

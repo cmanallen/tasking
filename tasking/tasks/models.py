@@ -69,3 +69,12 @@ class Image(TimeStamp):
 	task = models.ForeignKey(Task)
 	# Table Fields
 	image = models.ImageField(upload_to='images/')
+
+class Attachment(TimeStamp):
+	# Relations
+	task = models.ForeignKey(Task)
+	# Fields
+	file = models.FileField(upload_to='attachments/')
+	# Methods
+	def __str__(self):
+		return "%s" % self.file

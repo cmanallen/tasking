@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url(r'^tasks/delete/(?P<pk>\d+)/$', tasks.views.DeleteTask.as_view(),
     	name='delete-task'),
     # Tasks Comments
-    url(r'^tasks/comments/create', tasks.views.CreateComment.as_view(),
+    url(r'^tasks/comments/create', tasks.views.create_comment,
       name='create-task-comment'),
     # Projects
     url(r'^projects/$', projects.views.ListProject.as_view(),

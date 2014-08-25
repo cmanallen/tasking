@@ -4,7 +4,7 @@ from tasks.models import Task, Comment
 class TaskForm(forms.ModelForm):
 	due = forms.DateField(widget=forms.TextInput(
 		attrs={
-			'class': 'datepicker', 
+			'class': 'datepicker',
 			'data-date-format': 'yyyy-mm-dd',
 		}
 	))
@@ -16,4 +16,4 @@ class TaskForm(forms.ModelForm):
 class TaskCommentForm(forms.ModelForm):
 	class Meta:
 		model = Comment
-		fields = ('body',)
+		fields = ('body', 'task', 'user')

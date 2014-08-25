@@ -167,6 +167,8 @@ aside {
 	width:100%;
 }
 
+.avatar {width:50px;height:50px;border-radius:25px;}
+
 /* Pop-ups */
 .pop-up {
 	background: rgba(0,0,0,0.5);
@@ -212,7 +214,7 @@ input, textarea {
 }
 
 .bubble-user {
-	background:#a2a2a2;
+	background:rgb(70, 207, 95);
 	border-radius:3px;
 	padding:5px;
 	color:white;
@@ -220,7 +222,7 @@ input, textarea {
 }
 
 .bubble-other {
-	background:#a2a2a2;
+	background:rgb(90, 134, 230);
 	border-radius:3px;
 	padding:5px;
 	color:white;

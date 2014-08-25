@@ -21,26 +21,28 @@
 			{% if comment.user.id == user.id %}
 			<li class="autoflow mb20">
 				<figure class="ftlt">
-					<img src="{{ comment.user.avatar.url }}" alt="user" style="width:50px;height:50px;border-radius:25px;" />
+					<img src="{{ comment.user.avatar.url }}" alt="user" class="avatar" />
 				</figure>
 				<div class="bubble-user">{{ comment.body }}</div>
+				<span class="ftrt verysmall subtext">{{ comment.created }}</span>
 			</li>
 			{% else %}
-			<li class="autoflow">
+			<li class="autoflow mb20">
 				<figure class="ftrt">
-					<img src="/media/images/smiling-dog.jpg" alt="user" style="width:50px;height:50px;border-radius:25px;" />
+					<img src="/media/images/smiling-dog.jpg" alt="user" class="avatar" />
 				</figure>
 				<div class="bubble-other">{{ comment.body }}</div>
+				<span class="verysmall subtext">{{ comment.created }}</span>
 			</li>
 			{% endif %}
 		{% endfor %}
 	</ul>
 	{% endif %}
 	<!-- Add Comment -->
-	<form action="/tasks/comments/create" method="POST" enctype="multipart/form-data">
+	<form action="{% url 'create-task-comment' %}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
 		<input type="hidden" name="task" value="{{ task.id }}">
 		<textarea name="body" class="fluid mt10"></textarea>
-		<button type="submit" class="btn btn-primary mt10">Add Comment</button>
+		<button type="submit" class="btn btn-primary mt10 mb10">Add Comment</button>
 	</form>
 {% endblock %}

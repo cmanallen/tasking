@@ -18,7 +18,7 @@ class DetailProject(DetailView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(DetailProject, self).get_context_data(*args, **kwargs)
-		context['task_set'] = Task.objects.get_project_tasks(self.get_object().id)
+		context['task_set'] = Task.objects.filter(project_id=self.get_object().id)
 		return context
 
 class CreateProject(CreateView):
@@ -38,7 +38,7 @@ class UpdateProject(UpdateView):
 	template_name = 'manage_project.html'
 
 	def get_context_data(self, **kwargs):
-		context = super(UpdateProject, self).get_context_data(*kwargs)
+		context = super(UpdateProject, self).get_context_data(**kwargs)
 		context['action'] = reverse('update-project', kwargs={'pk': self.get_object().id})
 		return context
 

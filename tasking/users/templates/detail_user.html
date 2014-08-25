@@ -1,12 +1,29 @@
 {% extends 'base.html' %}
+{% load endless %}
 
 {% block article %}
 	<!-- Task Heading -->
-	{{ user.username }}
-	{{ user.email }}
-	{{ user.first }}
-	{{ user.last }}
-	{{ user.avatar }}
+	<div class="autoflow mt20">
+		<figure class="ftlt">
+			<img src="{{ user.avatar.url|default_if_none:'#' }}" alt="profile" style="width:150px;max-height:150px;border-radius:10px;" />
+		</figure>
+		<div class="ftlt ml10">
+			<ul class="list-unstyled">
+				<li>
+					<h4>{{ user.username }}</h4>
+				</li>
+				<li>
+					<b>Name: </b>{{ user.first_name }} {{ user.last_name }}
+				</li>
+				<li>
+					<b>Email: </b>{{ user.email }}
+				</li>
+				<li>
+					Member since <em>{{ user.date_joined }}</em>
+				</li>
+			</ul>
+		</div>
+	</div>
 
 	<hr />
 	{% if task_set %}
@@ -21,6 +38,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		{% paginate task_set %}
 		{% for task in task_set %}
 			<tr>
 				<td>
@@ -36,7 +54,7 @@
 		<tfoot>
 			<!-- pagination -->
 			<tr>
-				<td colspan="5">Table Footer</td>
+				<td colspan="5">{% show_pages %}</td>
 			</tr>
 		</tfoot>
 	</table>

@@ -2,10 +2,11 @@
 Modular Classes -- Production
 **/
 
-/* Color Scheme & Patterns */
-.lightgray {background-color:#f7f7f7;}
-.darkgray {background-color: #333;}
-.diamond {background-image: url(../images/pattern.png);}
+/* General */
+.pointer {cursor:pointer;}
+
+/* Transparency */
+.opacity-half {opacity:0.5;}
 
 /* Text */
 .verysmall {font-size:.8em;}
@@ -40,40 +41,51 @@ Modular Classes -- Production
 
 
 /* Spacing */
+.pad0 {padding:0px!important;}
 .pad5 {padding:5px;}
 .pad10 {padding:10px;}
 .pad20 {padding:20px;}
 
+.hpad5 {padding-left:5px;padding-right:5px;}
 .hpad10 {padding-left:10px;padding-right:10px;}
 .hpad15 {padding-left:15px;padding-right:15px;}
 .hpad20 {padding-left:20px;padding-right:20px;}
 
+.vpad5 {padding-top:5px;padding-bottom:5px;}
 .vpad10 {padding-top:10px;padding-bottom:10px;}
 .vpad15 {padding-top:15px;padding-bottom:15px;}
 .vpad20 {padding-top:20px;padding-bottom:20px;}
 
+.mt0 {margin-top: 0px;}
 .mt5 {margin-top: 5px;}
 .mt10 {margin-top: 10px;}
 .mt15 {margin-top: 15px;}
 .mt20 {margin-top: 20px;}
+
 .mt5m {margin-top: -5px;}
 
+.mr0 {margin-right: 0px;}
 .mr5 {margin-right: 5px;}
 .mr10 {margin-right: 10px;}
 .mr15 {margin-right: 15px;}
 .mr20 {margin-right: 20px;}
+
 .mr5m {margin-right: -5px;}
 
+.mb0 {margin-bottom: 0px;}
 .mb5 {margin-bottom: 5px;}
 .mb10 {margin-bottom: 10px;}
 .mb15 {margin-bottom: 15px;}
 .mb20 {margin-bottom: 20px;}
+
 .mb5m {margin-bottom: -5px;}
 
+.ml0 {margin-left: 0px;}
 .ml5 {margin-left: 5px;}
 .ml10 {margin-left: 10px;}
 .ml15 {margin-left: 15px;}
 .ml20 {margin-left: 20px;}
+
 .ml5m {margin-left: -5px;}
 
 
@@ -156,6 +168,8 @@ aside {
 	width:100%;
 }
 
+.avatar {width:50px;height:50px;border-radius:25px;}
+
 /* Pop-ups */
 .pop-up {
 	background: rgba(0,0,0,0.5);
@@ -191,4 +205,39 @@ aside {
 	margin-left:-150px;
 	margin-top:-200px;
 
+}
+
+input, textarea {
+	background:white;
+	border:1px solid #c0c0c0;
+	border-radius:3px;
+	padding:4px;
+}
+
+.bubble-user {
+	background:rgb(70, 207, 95);
+	border-bottom:2px solid rgb(54, 181, 71);
+	border-radius:3px;
+	padding:5px;
+	color:white;
+	margin-left:60px;
+}
+
+.bubble-other {
+	background:rgb(90, 134, 230);
+	border-bottom:2px solid rgb(63, 114, 194);
+	border-radius:3px;
+	padding:5px;
+	color:white;
+	margin-right:60px;
+}
+
+.upload {
+	background:rgb(240, 240, 240);
+	border:1px solid rgb(215, 215, 215);
+}
+
+.upload input {
+	background:rgb(215, 215, 215);
+	border:1px solid rgb(199, 199, 199);
 }

@@ -2,3 +2,6 @@ Django==1.6.4
 South==0.8.4
 Pillow==2.4
 django-debug-toolbar
+django-messages==0.5.1
+django-wysiwyg
+html5lib

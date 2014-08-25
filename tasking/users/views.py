@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth import authenticate, login, logout
 from users.models import User
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, UserUpdateForm, UserChangePasswordForm
 from tasks.models import Task
 
 # Class Based Views
@@ -19,12 +19,13 @@ class DetailUser(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(DetailUser, self).get_context_data(*args, **kwargs)
-        context['task_set'] = Task.objects.get_user_tasks(self.get_object().id)
+        context['task_set'] = Task.objects.filter(user_task=self.get_object().id)
         return context
 
 class UpdateUser(UpdateView):
     model = User
     template_name = 'manage_user.html'
+    form_class = UserUpdateForm
 
 class DeleteUser(DeleteView):
     model = User
@@ -61,6 +62,7 @@ def user_login(request):
                 return HttpResponse("Wrong username/password")
     return HttpResponseRedirect('/')
 
+# Logout
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')

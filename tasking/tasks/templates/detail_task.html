@@ -2,25 +2,63 @@
 
 {% block article %}
 	<!-- Task Heading -->
-	<h2 class="inblock">{{ task.name }}</h2>
-	<a href="{% url "update-task" pk=task.id %}" class="ftrt mt20">
+	<a href="{% url "update-task" pk=task.id %}" class="ftrt">
 		<button type="button" class="btn btn-primary">Update Task</button>
 	</a>
+	<h2>{{ task.name }}</h2>
 	<p>Created by <b>{{ task.created_by }}</b> on <i>{{ task.created }}</i></p>
-	<hr />
-	
 	<!-- Descriptions -->
-	<p class="serif mb20">{{ task.description }}</p>
 	<hr />
-	
-	<!-- Comments -->
-	<form action="{{ action }}" method="POST" enctype="multipart/form-data">
+	<p class="serif mb20">{{ task.description|safe }}</p>
+	<!-- Attachments -->
+	{% if attachments %}
+		<ul class="list-unstyled autoflow mb20">
+			<li class="ftlt btn disabled"><span class="glyphicon glyphicon-file"></span></li>
+		{% for attachment in attachments %}
+			<li class="ftlt btn btn-default mr10 mb10"><a href="{{ attachment.file.url }}">{{ attachment }}</a></li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+	<form action="{% url 'create-task-attachment' %}" method="POST" enctype="multipart/form-data" class="upload inblock rad3 pad10">
 		{% csrf_token %}
+		<input type="hidden" name="task" value="{{ task.id }}">
+		<input type="file" name="file" value="">
+		<button type="submit" class="btn btn-primary mt10">Upload</button>
 	</form>
 {% endblock %}
 
 {% block aside %}
-	<button type="button" class="btn btn-success">Assign User</button>
-	<h4 class="mt20">Assignment History</h4>
-	<h4>Related Tasks</h4>
+	{% if comments %}
+	<!-- List Comments -->
+	<ul class="list-unstyled">
+		{% for comment in comments %}
+			{% if comment.user.id == user.id %}
+			<li class="autoflow mb20">
+				<figure class="ftlt">
+					<a href="/users/{{ comment.user.id }}"><img src="{{ comment.user.avatar.url }}" alt="user" class="avatar" /></a>
+				</figure>
+				<div class="bubble-user">{{ comment.body }}</div>
+				<span class="ftrt verysmall subtext">{{ comment.created }}</span>
+			</li>
+			{% else %}
+			<li class="autoflow mb20">
+				<figure class="ftrt">
+					<a href="/users/{{ comment.user.id }}"><img src="/media/images/smiling-dog.jpg" alt="user" class="avatar" /></a>
+				</figure>
+				<div class="bubble-other">{{ comment.body }}</div>
+				<span class="verysmall subtext">{{ comment.created }}</span>
+			</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>There doesn't seem to be anything here! Change that my writing a comment!</p>
+	{% endif %}
+	<!-- Add Comment -->
+	<form action="{% url 'create-task-comment' %}" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<input type="hidden" name="task" value="{{ task.id }}">
+		<textarea name="body" class="fluid mt10"></textarea>
+		<button type="submit" class="btn btn-primary mt10 mb10">Add Comment</button>
+	</form>
 {% endblock %}

@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'endless_pagination',
+    'django_messages',
+    'django_wysiwyg',
     'projects',
     'south',
     'tasks',
@@ -107,6 +109,8 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 )
 TEMPLATE_DIRS = (
     'tasking/templates',
+    'tasking/templates/messages',
+    'tasking/endless_pagination/templates/endless',
 )
 
 # User Profiles

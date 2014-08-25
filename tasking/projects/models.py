@@ -2,7 +2,9 @@ from django.db import models
 from django.db.models import Count
 from django.core.urlresolvers import reverse
 from utils.models import TimeStamp
-from users.models import User
+
+from django.conf import settings
+AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
 # Model Managers
 class ProjectManager(models.Manager):
@@ -16,7 +18,7 @@ class Project(TimeStamp):
 	description = models.TextField()
 	
 	# Relations
-	created_by = models.ForeignKey(User)
+	created_by = models.ForeignKey(AUTH_USER_MODEL)
 	
 	# Manager
 	objects = ProjectManager()

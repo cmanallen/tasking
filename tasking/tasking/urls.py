@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^messages/', include('django_messages.urls')),
     # Tasks
     url(r'^tasks/$', tasks.views.ListTask.as_view(),
     	name='list-task'),
@@ -26,6 +27,12 @@ urlpatterns = patterns('',
     	name='update-task'),
     url(r'^tasks/delete/(?P<pk>\d+)/$', tasks.views.DeleteTask.as_view(),
     	name='delete-task'),
+    # Tasks Comments
+    url(r'^tasks/comments/create', tasks.views.create_comment,
+      name='create-task-comment'),
+    # Tasks Attachments
+    url(r'^tasks/attachments/create', tasks.views.create_attachment,
+      name='create-task-attachment'),
     # Projects
     url(r'^projects/$', projects.views.ListProject.as_view(),
         name='list-project'),
@@ -50,6 +57,8 @@ urlpatterns = patterns('',
         name='create-user'),
     url(r'^users/update/(?P<pk>\d+)/$', users.views.UpdateUser.as_view(),
         name='update-user'),
+    url(r'^users/change_password/$', 'django.contrib.auth.views.password_change',
+        name='change-password'),
     # Teams
     url(r'^teams/$', teams.views.ListTeam.as_view(),
         name='list-team'),
@@ -60,5 +69,5 @@ urlpatterns = patterns('',
     url(r'^teams/update/(?P<pk>\d+)/$', teams.views.UpdateTeam.as_view(),
         name='update-team'),
     url(r'^teams/delete/(?P<pk>\d+)/$', teams.views.DeleteTeam.as_view(),
-        name='delete-team'),    
+        name='delete-team'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

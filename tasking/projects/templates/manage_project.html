@@ -4,31 +4,28 @@
 {% endblock %}
 {% block article %}
 	{% if project.id %}
-		<h2>Update Project</h2>
+		<h2 class="inblock">Update Project</h2>
+		{% if project.id %}
+			<form class="ftrt mt20" action="{% url "delete-project" pk=project.id %}" method="POST">
+				{% csrf_token %}
+				<input type="submit" value="Delete" class="btn btn-danger" />
+			</form>
+		{% endif %}
 	{% else %}
 		<h2>Create Project</h2>
 	{% endif %}
+	<hr />
 	<form action="{{ action }}" method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
 		{% for field in form %}
 			<h4>{{ field.label }}</h4>
 			{{ field }}
-			<br />
-			<br />
 		{% endfor %}
 		<br />
 		{% if project.id %}
-			<input type="submit" value="Update" class="btn btn-put">
+			<input type="submit" value="Update" class="btn btn-primary">
 		{% else %}
-			<input type="submit" value="Create" class="btn btn-post">
+			<input type="submit" value="Create" class="btn btn-primary">
 		{% endif %}
 	</form>
-
-{% if project.id %}
-	<form action="{% url "delete-project" pk=project.id %}" method="POST">
-		{% csrf_token %}
-		<input type="submit" value="Yes, delete." class="btn btn-delete" />
-		<a href="{% url "list-project" %}">No, cancel.</a>
-	</form>
-{% endif %}
 {% endblock %}

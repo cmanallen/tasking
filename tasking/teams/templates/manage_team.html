@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block article %}
+	{% if team.id %}		
+		<h2 class="inblock">Update Team</h2>		
+		<!-- Delete team -->
+		<form action="{% url "delete-team" pk=team.id %}" method="POST" class="ftrt mt20">
+			{% csrf_token %}
+			<button type="submit" value="Yes, delete." class="btn btn-danger">Delete</button>
+		</form>
+	{% else %}		
+		<h2 class="inblock">Create Team</h2>
+	{% endif %}	
+	<hr />	
+
+	<form action="{{ action }}" method="POST" enctype="multipart/form-data" role="form">
+		{% csrf_token %}
+		{% for field in form %}
+			<h4>{{ field.label }}</h4>
+			{{ field }}
+		{% endfor %}
+		<br />
+		{% if team.id %}
+			<input type="submit" value="Update" class="btn btn-primary">
+		{% else %}
+			<input type="submit" value="Create" class="btn btn-primary">
+		{% endif %}
+	</form>
+{% endblock %}

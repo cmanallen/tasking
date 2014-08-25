@@ -13,3 +13,24 @@ class UserRegisterForm(forms.ModelForm):
 	class Meta:
 		model = User
 		fields = ('username', 'email', 'password')
+
+class UserUpdateForm(forms.ModelForm):
+	class Meta:
+		model = User
+		fields = (
+			'username',
+			'email',
+			'first_name',
+			'last_name',
+			'avatar',
+		)
+
+class UserChangePasswordForm(forms.ModelForm):
+	def save(self):
+		user = super(UserChangePasswordForm, self).save()
+		user.set_password(self.cleaned_data['new_password'])
+		user.save()
+		return user
+
+	class Meta:
+		model = User

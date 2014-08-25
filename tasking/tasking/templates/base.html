@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load wysiwyg %}
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -9,16 +11,18 @@
 	<!-- Styles -->
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" media="screen">
 	<link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+	<link rel="stylesheet" href="{% static 'lib/datepicker/css/datepicker.css' %}" media="screen">
+	<!-- Scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	{% wysiwyg_setup %}
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="wrapper">
 			{% if user.is_authenticated %}
-				
 				<!-- Header -->
 				<header class="ftlt fill" style="width:200px;padding:0;">
-					
 					<!-- User Area -->
 					<div id="user-area" class="autoflow mb20 vpad20 hpad20" style="background:#162636;">
 						<figure class="ftlt mr10">
@@ -32,7 +36,7 @@
 							<a href="/users/update/{{ user.id }}" class="mr5">
 								<span class="glyphicon glyphicon-cog"></span>
 							</a>
-							<a href="#" class="mr5">
+							<a href="/messages/inbox" class="mr5">
 								<span class="glyphicon glyphicon-envelope"></span>
 							</a>
 							<a href="/users/logout" class="mr5">
@@ -40,7 +44,6 @@
 							</a>
 						</div>
 					</div>
-					
 					<!-- Navigation -->
 					<nav class="hpad20">
 						<p class="white verysmall upper">Browse</p>
@@ -51,20 +54,10 @@
 							<li><a href="/teams">Teams</a></li>
 						</ul>
 					</nav>
-					
-					<!-- Quicklist -->
-					<nav class="hpad20">
-						<p class="white verysmall upper">Quick List</p>
-						<ul class="list-unstyled">
-							{% block quicklist %}
-							{% endblock %}
-						</ul>
-					</nav>
-				
 				</header>
-				
+
 				<!-- Secondary Information (Meta Data) -->
-				<aside class="ftrt hpad15 vpad20 fill" style="width:300px;">
+				<aside class="ftrt hpad15 vpad20 fill autoflow" style="width:300px;">
 					{% block aside %}
 						<p>Test!</p>
 					{% endblock %}
@@ -72,26 +65,22 @@
 
 				<!-- Content -->
 				<main class="fill autoflow hpad15">
-					
 					<!-- Primary Information -->
 					<article>
 						{% block article %}
 						{% endblock %}
 					</article>
-					
 					<!-- Footer -->
 					<footer>
 						<!-- Sitemap -->
 						<!-- Return to top -->
 						{% block footer %}
 						{% endblock %}
-					</footer>	
-				
-				</main>				
-			
+					</footer>
+				</main>
+				{% wysiwyg_editor "id_description" %}
 			{% else %}
-				
-				<!--  -->
+				<!-- Login -->
 				<h2>Log In</h2>
 				<form action="/users/login" method="POST">
 					{% csrf_token %}
@@ -103,8 +92,7 @@
 						<button type="submit">Log in</button>
 					</div>
 				</form>
-				
-				<!--  -->
+				<!-- Register -->
 				<h2>Register</h2>
 				<form action="/users/create" method="POST">
 					{% csrf_token %}
@@ -118,13 +106,12 @@
 						<button type="submit">Register</button>
 					</div>
 				</form>
-
 			{% endif %}
 			</div>
 		</div>
 	</div>
 	<!-- Scripts -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'lib/datepicker/js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

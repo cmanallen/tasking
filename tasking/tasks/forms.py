@@ -11,7 +11,7 @@ class TaskForm(forms.ModelForm):
 
 	class Meta:
 		model = Task
-		fields = ('project', 'name', 'due', 'priority', 'task_type', 'description', 'created_by')
+		fields = ('project', 'name', 'due', 'priority', 'task_type', 'description')
 
 class TaskCommentForm(forms.ModelForm):
 	class Meta:

@@ -30,6 +30,15 @@ class CreateTask(CreateView):
 		context['action'] = reverse('create-task')
 		return context
 
+	def form_valid(self, form):
+		task = form.save(commit=False)
+		task.created_by = self.request.user
+		task.save()
+		return HttpResponseRedirect(self.get_success_url())
+
+	def get_success_url(self):
+		return reverse('list-task')
+
 class UpdateTask(UpdateView):
 	model = Task
 	template_name = 'manage_task.html'

@@ -15,6 +15,7 @@
 	<hr />
 	<form action="{{ action }}" method="POST" enctype="multipart/form-data" role="form">
 		{% csrf_token %}
+		<input type="hidden" name="project" value="{{ task.id }}">
 		{% for field in form %}
 			<h4>{{ field.label }}</h4>
 			{{ field }}

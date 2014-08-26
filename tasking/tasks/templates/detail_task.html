@@ -2,13 +2,18 @@
 
 {% block article %}
 	<!-- Task Heading -->
-	<a href="{% url "update-task" pk=task.id %}" class="ftrt">
-		<button type="button" class="btn btn-primary">Update Task</button>
-	</a>
 	<h2>{{ task.name }}</h2>
 	<p>Created by <b>{{ task.created_by }}</b> on <i>{{ task.created }}</i></p>
-	<!-- Descriptions -->
+	<!-- Task Controls -->
 	<hr />
+	<a class="btn btn-primary" href="{% url "update-task" pk=task.id %}"><span class="glyphicon glyphicon-cog mr10"></span>Update</a>
+	<a class="btn btn-primary"><span class="glyphicon glyphicon-wrench mr10"></span>Work</a>
+	<a class="btn btn-primary"><span class="glyphicon glyphicon-user mr10"></span>Suggest</a>
+	{% if task.status == 0 %}
+		<a class="btn btn-success"><span class="glyphicon glyphicon-ok mr10"></span>Mark Complete</a>
+	{% endif %}
+	<hr />
+	<!-- Descriptions -->
 	<p class="serif mb20">{{ task.description|safe }}</p>
 	<!-- Attachments -->
 	{% if attachments %}

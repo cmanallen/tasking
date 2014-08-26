@@ -10,7 +10,11 @@
 	<a class="btn btn-primary"><span class="glyphicon glyphicon-wrench mr10"></span>Work</a>
 	<a class="btn btn-primary"><span class="glyphicon glyphicon-user mr10"></span>Suggest</a>
 	{% if task.status == 0 %}
-		<a class="btn btn-success"><span class="glyphicon glyphicon-ok mr10"></span>Mark Complete</a>
+		<form action="/tasks/complete" method="post" enctype="multipart/form-data" class="inblock">
+			{% csrf_token %}
+			<input type="hidden" name="id" value="{{ task.id }}">
+			<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok mr10"></span>Mark Complete</button>
+		</form>
 	{% endif %}
 	<hr />
 	<!-- Descriptions -->
@@ -57,7 +61,7 @@
 		{% endfor %}
 	</ul>
 	{% else %}
-	<p>There doesn't seem to be anything here! Change that my writing a comment!</p>
+	<p>There doesn't seem to be anything here! Change that by writing a comment!</p>
 	{% endif %}
 	<!-- Add Comment -->
 	<form action="{% url 'create-task-comment' %}" method="POST" enctype="multipart/form-data">

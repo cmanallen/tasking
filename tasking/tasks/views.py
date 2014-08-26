@@ -81,3 +81,7 @@ def create_attachment(request):
 			return HttpResponseRedirect('/tasks/%s' % post_values['task'])
 		else:
 			return HttpResponseRedirect('/tasks/%s' % post_values['task'])
+
+def complete_task(request):
+	Task.objects.filter(id=request.POST['id']).update(status=1)
+	return HttpResponseRedirect('/tasks/%s' % request.POST['id'])

@@ -33,6 +33,9 @@ urlpatterns = patterns('',
     # Tasks Attachments
     url(r'^tasks/attachments/create', tasks.views.create_attachment,
       name='create-task-attachment'),
+    # Tasks Complete
+    url(r'^tasks/complete', tasks.views.complete_task,
+      name='complete-task'),
     # Projects
     url(r'^projects/$', projects.views.ListProject.as_view(),
         name='list-project'),

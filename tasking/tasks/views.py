@@ -9,6 +9,11 @@ class ListTask(ListView):
 	model = Task
 	template_name = 'list_task.html'
 
+	def get_context_data(self, *args, **kwargs):
+		context = super(ListTask, self).get_context_data(*args, **kwargs)
+		context['user_tasks'] = Task.objects.filter(user_task=self.request.user.id)[:5]
+		return context
+
 class DetailTask(DetailView):
 	model = Task
 	template_name = 'detail_task.html'

@@ -13,7 +13,7 @@
 		<form action="/tasks/complete" method="post" enctype="multipart/form-data" class="inblock">
 			{% csrf_token %}
 			<input type="hidden" name="id" value="{{ task.id }}">
-			<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok mr10"></span>Mark Complete</button>
+			<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok mr10"></span>Close Task</button>
 		</form>
 	{% endif %}
 	<hr />

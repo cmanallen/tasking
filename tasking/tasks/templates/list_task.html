@@ -46,5 +46,17 @@
 	{% endif %}
 {% endblock %}
 {% block aside %}
-	<h4>Activity</h4>
+	<h4>Recent Tasks</h4>
+	{% if user_tasks %}
+		<ul class="list-unstyled">
+		{% for task in user_tasks %}
+			<li class="pad10 bborder mb5 bg-white">
+				<a href="/tasks/{{ task.id }}">{{ task.name }}</a>
+				<span class="subtext verysmall">Due: {{ task.due }}</span>
+			</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p>There doesn't seem to be any tasks assigned to you!</p>
+	{% endif %}
 {% endblock %}

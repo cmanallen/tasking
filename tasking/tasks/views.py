@@ -9,6 +9,11 @@ class ListTask(ListView):
 	model = Task
 	template_name = 'list_task.html'
 
+	def get_context_data(self, *args, **kwargs):
+		context = super(ListTask, self).get_context_data(*args, **kwargs)
+		context['user_tasks'] = Task.objects.filter(user_task=self.request.user.id)[:5]
+		return context
+
 class DetailTask(DetailView):
 	model = Task
 	template_name = 'detail_task.html'
@@ -81,3 +86,7 @@ def create_attachment(request):
 			return HttpResponseRedirect('/tasks/%s' % post_values['task'])
 		else:
 			return HttpResponseRedirect('/tasks/%s' % post_values['task'])
+
+def complete_task(request):
+	Task.objects.filter(id=request.POST['id']).update(status=1)
+	return HttpResponseRedirect('/tasks/%s' % request.POST['id'])

@@ -27,15 +27,18 @@ urlpatterns = patterns('',
     	name='update-task'),
     url(r'^tasks/delete/(?P<pk>\d+)/$', tasks.views.DeleteTask.as_view(),
     	name='delete-task'),
-    # Tasks Comments
-    url(r'^tasks/comments/create', tasks.views.create_comment,
-      name='create-task-comment'),
-    # Tasks Attachments
-    url(r'^tasks/attachments/create', tasks.views.create_attachment,
-      name='create-task-attachment'),
-    # Tasks Complete
-    url(r'^tasks/complete', tasks.views.complete_task,
-      name='complete-task'),
+      # Tasks Comments
+      url(r'^tasks/comments/create', tasks.views.create_comment,
+        name='create-task-comment'),
+      # Tasks Attachments
+      url(r'^tasks/attachments/create', tasks.views.create_attachment,
+        name='create-task-attachment'),
+      # Tasks Complete
+      url(r'^tasks/complete', tasks.views.complete_task,
+        name='complete-task'),
+      # Tasks UserTask
+      url(r'^tasks/work', tasks.views.create_usertask,
+        name='create-task-user'),
     # Projects
     url(r'^projects/$', projects.views.ListProject.as_view(),
         name='list-project'),

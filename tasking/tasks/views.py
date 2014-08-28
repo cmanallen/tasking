@@ -1,7 +1,9 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+
 from tasks.models import Task, Comment, Attachment
+from users.models import User
 from tasks.forms import TaskForm, TaskCommentForm, TaskAttachmentForm
 
 # Tasks
@@ -22,6 +24,9 @@ class DetailTask(DetailView):
 		context = super(DetailTask, self).get_context_data(*args, **kwargs)
 		context['comments'] = Comment.objects.filter(task=self.get_object().id)
 		context['attachments'] = Attachment.objects.filter(task=self.get_object().id)
+		context['user_tasks'] = User.objects.filter(
+			task=self.get_object().id,
+		).values_list('pk', flat=True)
 		context['upload_form'] = TaskAttachmentForm
 		return context
 
@@ -85,8 +90,17 @@ def create_attachment(request):
 			form.save()
 			return HttpResponseRedirect('/tasks/%s' % post_values['task'])
 		else:
-			return HttpResponseRedirect('/tasks/%s' % post_values['task'])
+			return HttpResponseRedirect('/')
+
+def create_usertask(request):
+	if request.method == 'POST':
+		task = Task.objects.filter(id=request.POST['id'])
+		if request.user.is_authenticated():
+			for t in task:
+				t.user_task.add(request.user.id)
+		return HttpResponseRedirect('/tasks/%s' % request.POST['id'])
 
 def complete_task(request):
-	Task.objects.filter(id=request.POST['id']).update(status=1)
-	return HttpResponseRedirect('/tasks/%s' % request.POST['id'])
+	if request.method == 'POST':
+		Task.objects.filter(id=request.POST['id']).update(status=1)
+		return HttpResponseRedirect('/tasks/%s' % request.POST['id'])

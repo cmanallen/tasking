@@ -6,16 +6,26 @@
 	<p>Created by <b>{{ task.created_by }}</b> on <i>{{ task.created }}</i></p>
 	<!-- Task Controls -->
 	<hr />
-	<a class="btn btn-primary" href="{% url "update-task" pk=task.id %}"><span class="glyphicon glyphicon-cog mr10"></span>Update</a>
-	<a class="btn btn-primary"><span class="glyphicon glyphicon-wrench mr10"></span>Work</a>
-	<a class="btn btn-primary"><span class="glyphicon glyphicon-user mr10"></span>Suggest</a>
-	{% if task.status == 0 %}
-		<form action="/tasks/complete" method="post" enctype="multipart/form-data" class="inblock">
-			{% csrf_token %}
-			<input type="hidden" name="id" value="{{ task.id }}">
-			<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok mr10"></span>Close Task</button>
-		</form>
-	{% endif %}
+		<!-- Update Task -->
+		<a class="btn btn-primary" href="{% url "update-task" pk=task.id %}"><span class="glyphicon glyphicon-cog mr10"></span>Update</a>
+		<!-- Work Task -->
+		{% if user.pk not in user_tasks %}
+			<form action="{% url "create-task-user" %}" method="post" enctype="multipart/form-data" class="inblock">
+				{% csrf_token %}
+				<input type="hidden" name="id" value="{{ task.id }}">
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-wrench mr10"></span>Work</button>
+			</form>
+		{% endif %}
+		<!-- Suggest User -->
+		<a class="btn btn-primary"><span class="glyphicon glyphicon-user mr10"></span>Suggest</a>
+		<!-- Mark Complete -->
+		{% if task.status == 0 %}
+			<form action="{% url "complete-task" %}" method="post" enctype="multipart/form-data" class="inblock">
+				{% csrf_token %}
+				<input type="hidden" name="id" value="{{ task.id }}">
+				<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok mr10"></span>Close Task</button>
+			</form>
+		{% endif %}
 	<hr />
 	<!-- Descriptions -->
 	<p class="serif mb20">{{ task.description|safe }}</p>

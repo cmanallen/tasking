@@ -12,6 +12,7 @@ Modular Classes -- Production
 .verysmall {font-size:.8em;}
 .small {font-size:.9em;}
 .normal {font-size:1em;}
+.medium {font-size:1.1em;}
 .large {font-size:1.2em;}
 .verylarge {font-size:1.5em;}
 
@@ -154,9 +155,7 @@ header {
 	background:#233140;
 }
 
-main {
-
-}
+.nav-hover:hover {background:#162636;}
 
 aside {
 	background:#eee;

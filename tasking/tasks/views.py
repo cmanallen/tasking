@@ -14,6 +14,9 @@ class ListTask(ListView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(ListTask, self).get_context_data(*args, **kwargs)
 		context['user_tasks'] = Task.objects.filter(user_task=self.request.user.id)[:5]
+		context['tasks_due'] = Task.objects.filter(
+			user_task=self.request.user.id,
+		).extra(order_by=['due'])[:5]
 		return context
 
 class DetailTask(DetailView):

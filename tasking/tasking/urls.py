@@ -51,7 +51,7 @@ urlpatterns = patterns('',
     url(r'^projects/delete/(?P<pk>\d+)/$', projects.views.DeleteProject.as_view(),
         name='delete-project'),
     # Users
-    url(r'^users/login$', users.views.user_login,
+    url(r'^users/login$', users.views.user_login, {'template_name': 'user_login.html'},
         name='login-user'),
     url(r'^users/logout$', users.views.user_logout,
         name='logout-user'),

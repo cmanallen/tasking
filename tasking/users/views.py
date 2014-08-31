@@ -10,59 +10,57 @@ from tasks.models import Task
 
 # Class Based Views
 class ListUser(ListView):
-    model = User
-    template_name = 'list_user.html'
+  model = User
+  template_name = 'list_user.html'
 
 class DetailUser(DetailView):
-    model = User
-    template_name = 'detail_user.html'
+  model = User
+  template_name = 'detail_user.html'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(DetailUser, self).get_context_data(*args, **kwargs)
-        context['task_set'] = Task.objects.filter(user_task=self.get_object().id)
-        return context
+  def get_context_data(self, *args, **kwargs):
+    context = super(DetailUser, self).get_context_data(*args, **kwargs)
+    context['task_set'] = Task.objects.filter(user_task=self.get_object().id)
+    return context
 
 class UpdateUser(UpdateView):
-    model = User
-    template_name = 'manage_user.html'
-    form_class = UserUpdateForm
+  model = User
+  template_name = 'manage_user.html'
+  form_class = UserUpdateForm
 
 class DeleteUser(DeleteView):
-    model = User
-    template_name = 'manage_user.html'
+  model = User
+  template_name = 'manage_user.html'
 
 # Create user
 def user_register(request):
-    if request.user.is_anonymous():
-        if request.method == 'POST':
-            form = UserRegisterForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/users/login')
-        else:
-            form = UserRegisterForm()
-
-        return HttpResponseRedirect('/users/create')
+  if request.user.is_anonymous():
+    if request.method == 'POST':
+      form = UserRegisterForm(request.POST)
+      if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/users/login')
     else:
-        return HttpResponseRedirect('/')
+      form = UserRegisterForm()
+    return HttpResponseRedirect('/users/create')
+  else:
+    return HttpResponseRedirect('/')
 
 # Authentication
 def user_login(request):
-    if request.user.is_anonymous():
-        if request.method == 'POST':
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                else:
-                    return HttpResponse("Not active")
-            else:
-                return HttpResponse("Wrong username/password")
-    return HttpResponseRedirect('/')
+  if request.user.is_anonymous():
+    if request.method == 'POST':
+      username = request.POST['username']
+      password = request.POST['password']
+      user = authenticate(username=username, password=password)
+      if user is not None:
+        if user.is_active:
+          login(request, user)
+        else:
+          return HttpResponse("Not active")
+      else:
+        return HttpResponse("Wrong username/password")
 
 # Logout
 def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect('/')
+  logout(request)
+  return HttpResponseRedirect('/')

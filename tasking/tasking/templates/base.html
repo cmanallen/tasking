@@ -20,7 +20,6 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="wrapper">
-			{% if user.is_authenticated %}
 				<!-- Header -->
 				<header class="ftlt fill" style="width:200px;padding:0;">
 					<!-- User Area -->
@@ -80,34 +79,6 @@
 					</footer>
 				</main>
 				{% wysiwyg_editor "id_description" %}
-			{% else %}
-				<!-- Login -->
-				<h2>Log In</h2>
-				<form action="/users/login" method="POST">
-					{% csrf_token %}
-					<h4>Username</h4>
-					<input type="text" name="username" placeholder="admin">
-					<h4>Password</h4>
-					<input type="password" name="password">
-					<div class="btn-list">
-						<button type="submit">Log in</button>
-					</div>
-				</form>
-				<!-- Register -->
-				<h2>Register</h2>
-				<form action="/users/create" method="POST">
-					{% csrf_token %}
-					<h4>Username</h4>
-					<input type="text" name="username" placeholder="admin">
-					<h4>Email</h4>
-					<input type="text" name="email" placeholder="admin@mail.com">
-					<h4>Password</h4>
-					<input type="password" name="password">
-					<div class="btn-list">
-						<button type="submit">Register</button>
-					</div>
-				</form>
-			{% endif %}
 			</div>
 		</div>
 	</div>

@@ -1,9 +1,11 @@
-from django.shortcuts import render, RequestContext, render_to_response
-from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
+from django.shortcuts import render_to_response
+from django.views.generic import FormView, CreateView, UpdateView, DeleteView, DetailView, ListView
 from django.core.context_processors import csrf
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
-
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
 from users.models import User
 from users.forms import UserRegisterForm, UserUpdateForm, UserChangePasswordForm
 from tasks.models import Task
@@ -22,43 +24,46 @@ class DetailUser(DetailView):
     context['task_set'] = Task.objects.filter(user_task=self.get_object().id)
     return context
 
+class CreateUser(CreateView):
+  model = User
+  template_name = 'manage_user.html'
+  form_class = UserCreationForm
+
+  def get_context_data(self, *args, **kwargs):
+    context = super(CreateUser, self).get_context_data(*args, **kwargs)
+    context['action'] = reverse('create-user')
+    return context
+
+  def get_success_url(self):
+    return reverse('list-user')
+
 class UpdateUser(UpdateView):
   model = User
   template_name = 'manage_user.html'
   form_class = UserUpdateForm
 
+  def get_context_data(self, *args, **kwargs):
+    context = super(UpdateUser, self).get_context_data(*args, **kwargs)
+    context['action'] = reverse('update-user', kwargs={'pk': self.get_object().id})
+    context['update'] = True
+    return context
+
 class DeleteUser(DeleteView):
   model = User
   template_name = 'manage_user.html'
 
-# Create user
-def user_register(request):
-  if request.user.is_anonymous():
-    if request.method == 'POST':
-      form = UserRegisterForm(request.POST)
-      if form.is_valid():
-        form.save()
-        return HttpResponseRedirect('/users/login')
-    else:
-      form = UserRegisterForm()
-    return HttpResponseRedirect('/users/create')
-  else:
-    return HttpResponseRedirect('/')
+class LoginUser(FormView):
+  form_class = AuthenticationForm
+  template_name = 'user_login.html'
 
-# Authentication
-def user_login(request):
-  if request.user.is_anonymous():
-    if request.method == 'POST':
-      username = request.POST['username']
-      password = request.POST['password']
-      user = authenticate(username=username, password=password)
-      if user is not None:
-        if user.is_active:
-          login(request, user)
-        else:
-          return HttpResponse("Not active")
-      else:
-        return HttpResponse("Wrong username/password")
+  def form_valid(self, form):
+    login(self.request, form.get_user())
+    if self.request.session.test_cookie_worked():
+      self.request.session.delete_test_cookie()
+    return HttpResponseRedirect('/tasks')
+
+  def form_invalid(self, form):
+    return self.render_to_response(self.get_context_data(form=form))
 
 # Logout
 def user_logout(request):

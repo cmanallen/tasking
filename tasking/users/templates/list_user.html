@@ -5,9 +5,11 @@
 	<!-- Heading -->
 	<div class="block autoflow">
 		<h2 class="inblock">Users</h2>
+		{% if user.is_staff %}
 		<a href="/users/create" class="ftrt mt20">
 			<button type="text" class="btn btn-primary">Create User</button>
 		</a>
+		{% endif %}
 	</div>
 	<hr />
 
@@ -17,9 +19,9 @@
 			<thead>
 				<tr>
 					<th>Username</th>
+					<th>Full Name</th>
 					<th>Email</th>
-					<th>Tasks</th>
-					<th>Something</th>
+					<th>Message</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,9 +29,9 @@
 				{% for user in object_list %}
 				<tr>
 					<td><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></td>
+					<td>{{ user.first_name }} {{ user.last_name }}</td>
 					<td>{{ user.email }}</td>
-					<td>{{ user.tasks }}</td>
-					<td>&nbsp;</td>
+					<td><a href="#">Send Message</a></td>
 				</tr>
 				{% endfor %}
 			</tbody>

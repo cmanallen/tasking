@@ -4,10 +4,10 @@ from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, PasswordResetForm
 
 from users.models import User
-from users.forms import UserRegisterForm, UserUpdateForm, UserChangePasswordForm
+from users.forms import UserRegisterForm, UserUpdateForm
 from tasks.models import Task
 
 # Class Based Views
@@ -42,9 +42,12 @@ class UpdateUser(UpdateView):
   template_name = 'manage_user.html'
   form_class = UserUpdateForm
 
+  def get_object(self):
+    return User.objects.get(pk=self.request.user.id)
+
   def get_context_data(self, *args, **kwargs):
     context = super(UpdateUser, self).get_context_data(*args, **kwargs)
-    context['action'] = reverse('update-user', kwargs={'pk': self.get_object().id})
+    context['action'] = reverse('update-user')
     context['update'] = True
     return context
 
@@ -64,6 +67,13 @@ class LoginUser(FormView):
 
   def form_invalid(self, form):
     return self.render_to_response(self.get_context_data(form=form))
+
+class ChangePasswordUser(FormView):
+  form_class = PasswordChangeForm
+  template_name = 'change_password.html'
+
+  def get_object(self):
+    return User.objects.get(pk=self.request.user.id)
 
 # Logout
 def user_logout(request):

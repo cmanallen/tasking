@@ -243,3 +243,8 @@ input, textarea {
 	background:rgb(215, 215, 215);
 	border:1px solid rgb(199, 199, 199);
 }
+
+.nav-link {color:white;}
+.nav-link:hover {color:white;}
+.nav-link span {color:gray;}
+.nav-link:hover span {color:white;}

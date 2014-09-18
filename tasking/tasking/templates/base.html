@@ -25,13 +25,10 @@
 					<!-- User Area -->
 					<div id="user-area" class="autoflow mb20 vpad20 hpad20" style="background:#162636;">
 						<figure class="ftlt mr10">
-							<img src="{{ user.avatar.url|default_if_none:'#' }}" alt="avatar" style="width:50px;height:50px;border-radius:25px;" />
+								<img src="{{ user.avatar.url }}" alt="avatar" style="width:50px;height:50px;border-radius:25px;" />
 						</figure>
 						<div class="mt5">
 							<span class="white"><b>{{ user.first_name }} {{ user.last_name }}</b></span><br />
-							<a href="/users/profile/{{ user.id }}" class="mr5">
-								<span class="glyphicon glyphicon-user"></span>
-							</a>
 							<a href="/users/update/{{ user.id }}" class="mr5">
 								<span class="glyphicon glyphicon-cog"></span>
 							</a>
@@ -44,35 +41,40 @@
 						</div>
 					</div>
 					<!-- Navigation -->
-					<nav>
-						<p class="white verysmall upper hpad20">Browse</p>
+					<nav class="hpad20">
+						<p class="white verysmall upper">Browse</p>
 						<ul class="list-unstyled">
-							<li><a href="/" class="o50 white hpad20 vpad10 block nav-hover"><span class="glyphicon medium glyphicon-dashboard mr10"></span>Dashboard</a></li>
-							<li><a href="/projects" class="o50 white hpad20 vpad10 block nav-hover"><span class="glyphicon medium glyphicon-th-list mr10"></span>Projects</a></li>
-							<li><a href="/tasks" class="o50 white hpad20 vpad10 block nav-hover"><span class="glyphicon medium glyphicon-tasks mr10"></span>Tasks</a></li>
-							<li><a href="/users" class="o50 white hpad20 vpad10 block nav-hover"><span class="glyphicon medium glyphicon-user mr10"></span>Contacts</a></li>
-							<li><a href="/teams" class="o50 white hpad20 vpad10 block nav-hover"><span class="glyphicon medium glyphicon-user mr10"></span>Teams</a></li>
+							<li><a href="/">
+								<span class="glyphicon medium glyphicon-dashboard mr10"></span>
+								Dashboard
+							</a></li>
+							<li><a href="/projects">
+								<span class="glyphicon medium glyphicon-th-list mr10"></span>
+								Projects
+							</a></li>
+							<li><a href="/tasks">
+								<span class="glyphicon medium glyphicon-tasks mr10"></span>
+								Tasks
+							</a></li>
+							<li><a href="/users">
+								<span class="glyphicon medium glyphicon-user mr10"></span>
+								Contacts
+							</a></li>
+							<li><a href="/teams">
+								<span class="glyphicon medium glyphicon-user mr10"></span>
+								Teams
+							</a></li>
 						</ul>
-					</nav>
-					<nav>
-						<p class="white verysmall upper hpad20">Channels</p>
-						{% if channels %}
-						<ul class="list-unstyled">
-						{% for channel in channels %}
-							<li></li>
-						{% endfor %}
-						</ul>
-					{% endif %}
 					</nav>
 				</header>
-
 				<!-- Secondary Information (Meta Data) -->
 				<aside class="ftrt hpad15 vpad20 fill autoflow" style="width:300px;">
 					{% block aside %}
-						<p>Test!</p>
+						<script>
+							$('aside').remove();
+						</script>
 					{% endblock %}
 				</aside>
-
 				<!-- Content -->
 				<main class="fill autoflow hpad15">
 					<!-- Primary Information -->

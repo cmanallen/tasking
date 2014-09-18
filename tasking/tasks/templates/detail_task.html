@@ -54,7 +54,7 @@
 			{% if comment.user.id == user.id %}
 			<li class="autoflow mb20">
 				<figure class="ftlt">
-					<a href="/users/{{ comment.user.id }}"><img src="{{ comment.user.avatar.url }}" alt="user" class="avatar" /></a>
+					<a href="/users/profile/{{ comment.user.id }}"><img src="{{ comment.user.avatar.url }}" alt="user" class="avatar" /></a>
 				</figure>
 				<div class="bubble-user">{{ comment.body }}</div>
 				<span class="ftrt verysmall subtext">{{ comment.created }}</span>
@@ -62,7 +62,7 @@
 			{% else %}
 			<li class="autoflow mb20">
 				<figure class="ftrt">
-					<a href="/users/{{ comment.user.id }}"><img src="/media/images/smiling-dog.jpg" alt="user" class="avatar" /></a>
+					<a href="/users/profile/{{ comment.user.id }}"><img src="{{ comment.user.avatar.url}}" alt="user" class="avatar" /></a>
 				</figure>
 				<div class="bubble-other">{{ comment.body }}</div>
 				<span class="verysmall subtext">{{ comment.created }}</span>

@@ -27,7 +27,7 @@ class DetailUser(DetailView):
 class CreateUser(CreateView):
   model = User
   template_name = 'manage_user.html'
-  form_class = UserCreationForm
+  form_class = UserRegisterForm
 
   def get_context_data(self, *args, **kwargs):
     context = super(CreateUser, self).get_context_data(*args, **kwargs)

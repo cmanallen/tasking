@@ -76,4 +76,10 @@ urlpatterns = patterns('',
         name='update-team'),
     url(r'^teams/delete/(?P<pk>\d+)/$', teams.views.DeleteTeam.as_view(),
         name='delete-team'),
+        # Join Team
+        url(r'^teams/join/$', teams.views.create_user_team,
+          name='join-team'),
+        # Leave Team
+        url(r'^teams/leave/$', teams.views.remove_user_team,
+          name='leave-team'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

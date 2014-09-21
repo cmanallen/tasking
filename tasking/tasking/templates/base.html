@@ -21,11 +21,11 @@
 		<div class="row">
 			<div class="wrapper">
 				<!-- Header -->
-				<header class="ftlt fill" style="width:200px;padding:0;">
+				<header>
 					<!-- User Area -->
-					<div id="user-area" class="autoflow mb20 vpad20 hpad20" style="background:#162636;">
+					<div id="user-area" class="autoflow mb20 vpad20 hpad20">
 						<figure class="ftlt mr10">
-								<img src="{{ user.avatar.url }}" alt="avatar" style="width:50px;height:50px;border-radius:25px;" />
+								<img class="avatar" src="{{ user.avatar.url }}" alt="avatar" />
 						</figure>
 						<div class="mt5">
 							<span class="white"><b>{{ user.first_name }} {{ user.last_name }}</b></span><br />
@@ -41,34 +41,29 @@
 						</div>
 					</div>
 					<!-- Navigation -->
-					<nav class="hpad20">
-						<p class="white verysmall upper">Browse</p>
+					<nav>
+						<p class="white verysmall upper hpad20">Browse</p>
 						<ul class="list-unstyled">
-							<li><a href="/">
-								<span class="glyphicon medium glyphicon-dashboard mr10"></span>
-								Dashboard
-							</a></li>
-							<li><a href="/projects">
-								<span class="glyphicon medium glyphicon-th-list mr10"></span>
-								Projects
-							</a></li>
-							<li><a href="/tasks">
-								<span class="glyphicon medium glyphicon-tasks mr10"></span>
-								Tasks
-							</a></li>
-							<li><a href="/users">
-								<span class="glyphicon medium glyphicon-user mr10"></span>
-								Contacts
-							</a></li>
-							<li><a href="/teams">
-								<span class="glyphicon medium glyphicon-user mr10"></span>
-								Teams
-							</a></li>
+							<li>
+								<a href="/"><span class="glyphicon medium glyphicon-dashboard mr10"></span>Dashboard</a>
+							</li>
+							<li>
+								<a href="{% url 'list-project' %}"><span class="glyphicon medium glyphicon-th-list mr10"></span>Projects</a>
+							</li>
+							<li>
+								<a href="{% url 'list-task' %}"><span class="glyphicon medium glyphicon-tasks mr10"></span>Tasks</a>
+							</li>
+							<li>
+								<a href="{% url 'list-user' %}"><span class="glyphicon medium glyphicon-user mr10"></span>Contacts</a>
+							</li>
+							<li>
+								<a href="{% url 'list-team' %}"><span class="glyphicon medium glyphicon-flag mr10"></span>Teams</a>
+							</li>
 						</ul>
 					</nav>
 				</header>
 				<!-- Secondary Information (Meta Data) -->
-				<aside class="ftrt hpad15 vpad20 fill autoflow" style="width:300px;">
+				<aside>
 					{% block aside %}
 						<script>
 							$('aside').remove();
@@ -76,7 +71,7 @@
 					{% endblock %}
 				</aside>
 				<!-- Content -->
-				<main class="fill autoflow hpad15">
+				<main>
 					<!-- Primary Information -->
 					<article>
 						{% block article %}

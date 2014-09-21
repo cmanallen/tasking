@@ -8,6 +8,8 @@
 	<hr />
 		<!-- Update Task -->
 		<a class="btn btn-primary" href="{% url "update-task" pk=task.id %}"><span class="glyphicon glyphicon-cog mr10"></span>Update</a>
+		<!-- Suggest User -->
+		<a class="btn btn-primary"><span class="glyphicon glyphicon-user mr10"></span>Suggest</a>
 		<!-- Work Task -->
 		{% if user.pk not in user_tasks %}
 			<form action="{% url "create-task-user" %}" method="post" enctype="multipart/form-data" class="inblock">
@@ -15,16 +17,15 @@
 				<input type="hidden" name="id" value="{{ task.id }}">
 				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-wrench mr10"></span>Work</button>
 			</form>
-		{% endif %}
-		<!-- Suggest User -->
-		<a class="btn btn-primary"><span class="glyphicon glyphicon-user mr10"></span>Suggest</a>
-		<!-- Mark Complete -->
-		{% if task.status == 0 %}
-			<form action="{% url "complete-task" %}" method="post" enctype="multipart/form-data" class="inblock">
-				{% csrf_token %}
-				<input type="hidden" name="id" value="{{ task.id }}">
-				<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok mr10"></span>Close Task</button>
-			</form>
+		{% else %}
+			{% if task.status == 0 %}
+			<!-- Mark Complete -->
+				<form action="{% url "complete-task" %}" method="post" enctype="multipart/form-data" class="inblock">
+					{% csrf_token %}
+					<input type="hidden" name="id" value="{{ task.id }}">
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok mr10"></span>Close Task</button>
+				</form>
+			{% endif %}
 		{% endif %}
 	<hr />
 	<!-- Descriptions -->
@@ -42,7 +43,7 @@
 		{% csrf_token %}
 		<input type="hidden" name="task" value="{{ task.id }}">
 		<input type="file" name="file" value="">
-		<button type="submit" class="btn btn-primary mt10">Upload</button>
+		<button type="submit" class="btn btn-primary mt10"><i class="glyphicon glyphicon-upload mr10"></i>Upload</button>
 	</form>
 {% endblock %}
 
@@ -56,7 +57,7 @@
 				<figure class="ftlt">
 					<a href="/users/profile/{{ comment.user.id }}"><img src="{{ comment.user.avatar.url }}" alt="user" class="avatar" /></a>
 				</figure>
-				<div class="bubble-user">{{ comment.body }}</div>
+				<div class="bubble-user bubble">{{ comment.body }}</div>
 				<span class="ftrt verysmall subtext">{{ comment.created }}</span>
 			</li>
 			{% else %}
@@ -64,7 +65,7 @@
 				<figure class="ftrt">
 					<a href="/users/profile/{{ comment.user.id }}"><img src="{{ comment.user.avatar.url}}" alt="user" class="avatar" /></a>
 				</figure>
-				<div class="bubble-other">{{ comment.body }}</div>
+				<div class="bubble-other bubble">{{ comment.body }}</div>
 				<span class="verysmall subtext">{{ comment.created }}</span>
 			</li>
 			{% endif %}
@@ -78,6 +79,6 @@
 		{% csrf_token %}
 		<input type="hidden" name="task" value="{{ task.id }}">
 		<textarea name="body" class="fluid mt10"></textarea>
-		<button type="submit" class="btn btn-primary mt10 mb10">Add Comment</button>
+		<button type="submit" class="btn btn-primary mt10 mb10"><i class="glyphicon glyphicon-comment mr10"></i>Add Comment</button>
 	</form>
 {% endblock %}

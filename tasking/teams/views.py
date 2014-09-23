@@ -42,7 +42,7 @@ def create_user_team(request):
 		team = Team.objects.filter(id=team_id)
 		for t in team:
 			t.user_team.add(request.user.id)
-	return reverse('detail-team', kwargs={'pk':team_id})
+	return HttpResponseRedirect(reverse('detail-team', kwargs={'pk':team_id}))
 
 def remove_user_team(request):
 	if request.method == 'POST':

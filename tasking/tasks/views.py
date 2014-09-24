@@ -80,7 +80,7 @@ def create_comment(request):
 		form = TaskCommentForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/tasks/%s' % request.POST['task'])
+			return HttpResponseRedirect(reverse('detail-task', kwargs={'pk': request.POST['task']}))
 		else:
 			return HttpResponseRedirect('/')
 
@@ -91,7 +91,7 @@ def create_attachment(request):
 		form = TaskAttachmentForm(post_values, request.FILES)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/tasks/%s' % post_values['task'])
+			return HttpResponseRedirect(reverse('detail-task', kwargs={'pk': request.POST['task']}))
 		else:
 			return HttpResponseRedirect('/')
 
@@ -101,9 +101,9 @@ def create_usertask(request):
 		if request.user.is_authenticated():
 			for t in task:
 				t.user_task.add(request.user.id)
-		return HttpResponseRedirect('/tasks/%s' % request.POST['id'])
+		return HttpResponseRedirect(reverse('detail-task', kwargs={'pk': request.POST['id']}))
 
 def complete_task(request):
 	if request.method == 'POST':
 		Task.objects.filter(id=request.POST['id']).update(status=1)
-		return HttpResponseRedirect('/tasks/%s' % request.POST['id'])
+		return HttpResponseRedirect(reverse('detail-task', kwargs={'pk': request.POST['id']}))

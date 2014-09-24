@@ -35,7 +35,7 @@ class DeleteTeam(DeleteView):
 	template_name = 'manage_team.html'
 
 
-
+# Many-to-many Views
 def create_user_team(request):
 	if request.method == 'POST':
 		team_id = request.POST['id']
@@ -46,7 +46,8 @@ def create_user_team(request):
 
 def remove_user_team(request):
 	if request.method == 'POST':
-		team = Team.objects.filter(id=request.POST['id'])
+		team_id = request.POST['id']
+		team = Team.objects.filter(id=team_id)
 		for t in team:
 			t.user_team.remove(request.user.id)
-	return HttpResponseRedirect('/teams/%s' % request.POST['id'])
+	return HttpResponseRedirect(reverse('detail-team', kwargs={'pk':team_id}))

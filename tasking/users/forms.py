@@ -1,5 +1,7 @@
 from django import forms
-from users.models import User
+
+from .models import User
+
 
 class UserRegisterForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())
@@ -14,7 +16,9 @@ class UserRegisterForm(forms.ModelForm):
 		model = User
 		fields = ('username', 'email', 'password')
 
+
 class UserUpdateForm(forms.ModelForm):
+	
 	class Meta:
 		model = User
 		fields = (
@@ -25,7 +29,9 @@ class UserUpdateForm(forms.ModelForm):
 			'avatar',
 		)
 
+
 class UserChangePasswordForm(forms.ModelForm):
+	
 	def save(self):
 		user = super(UserChangePasswordForm, self).save()
 		user.set_password(self.cleaned_data['new_password'])

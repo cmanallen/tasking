@@ -15,7 +15,7 @@
 		<h2>Create Project</h2>
 	{% endif %}
 	<hr />
-	<form action="{{ action }}" method="POST" enctype="multipart/form-data">
+	<form action="{{ action }}" method="POST" enctype="multipart/form-data" id="project-form">
 		{% csrf_token %}
 		{% for field in form %}
 			<h4>{{ field.label }}</h4>
@@ -23,9 +23,58 @@
 		{% endfor %}
 		<br />
 		{% if project.id %}
-			<input type="submit" value="Update" class="btn btn-primary">
+			<button type="button" class="btn btn-primary" onclick="async()">Update</button>
 		{% else %}
-			<input type="submit" value="Create" class="btn btn-primary">
+			<button type="button" class="btn btn-primary" onclick="async()">Create</button>
 		{% endif %}
 	</form>
+
+	<script>
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+
+		function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		$.ajaxSetup({
+		    beforeSend: function(xhr, settings) {
+		        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		        }
+		    }
+		});
+
+		function async() {
+			$.ajax({
+				type: "POST",
+				url: "{{ action }}",
+				datatype: "json",
+				async: true,
+				data: {
+					csrfmiddlewaretoken: csrftoken,
+					name: $('#id_name').val(),
+					description: 'test',
+					created_by: $('#id_created_by').val(),
+				},
+				success: function(data) {
+					console.log(data);
+				},
+			});
+		};
+	</script>
 {% endblock %}

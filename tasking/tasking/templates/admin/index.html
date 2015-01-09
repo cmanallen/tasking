@@ -1,0 +1,88 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+
+
+
+{% block breadcrumbs %}{{ block.super }}{% endblock %}
+
+{% block content %}
+  <div id="content-main">
+    {% for app in app_list %}
+    <table class="table table-hover table-striped table-condensed">
+      <thead>
+        <tr>
+          <th style="width:84%;">{{ app.name }}</th>
+          <th style="width:8%;">Create</th>
+          <th style="width:8%;">Update</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for model in app.models %}
+        <tr>
+        {% if model.admin_url %}
+          <td scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></td>
+        {% else %}
+          <td scope="row">{{ model.name }}</td>
+        {% endif %}
+        {% if model.add_url %}
+          <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+        {% else %}
+          <td>&nbsp;</td>
+        {% endif %}
+        {% if model.admin_url %}
+          <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+        {% else %}
+          <td>&nbsp;</td>
+        {% endif %}
+        </tr>
+      {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr><td colspan="3"></td></tr>
+      </tfoot>
+    </table>
+    {% endfor %}
+  </div>
+  {% endblock %}
+
+  {% block sidebar %}
+  <div id="content-related">
+    <div class="module" id="recent-actions-module">
+      <h3>{% trans 'Recent Actions' %}</h3>
+      <hr />
+      <h4>{% trans 'My Actions' %}</h4>
+        {% load log %}
+        {% get_admin_log 10 as admin_log for_user user %}
+        {% if not admin_log %}
+        <p>{% trans 'None available' %}</p>
+        {% else %}
+        <ul class="list-unstyled">
+        {% for entry in admin_log %}
+          <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+            {% if entry.is_deletion or not entry.get_admin_url %}
+              {{ entry.object_repr }}
+            {% else %}
+              <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+            {% endif %}
+            <br/>
+            {% if entry.content_type %}
+              <span class="verysmall subtext">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>
+            {% else %}
+              <span class="verysmall subtext">{% trans 'Unknown content' %}</span>
+            {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+  </div>
+  {% block messages %}
+    {% if messages %}
+    <ul class="messagelist">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  {% endblock messages %}
+{% endblock %}

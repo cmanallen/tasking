@@ -1,0 +1,35 @@
+<nav>
+  <p class="white verysmall upper hpad20">Browse</p>
+  <ul class="list-unstyled">
+    <li>
+      <a href="/">
+        <i class="glyphicon medium glyphicon-dashboard mr10"></i>
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'list-project' %}">
+        <i class="glyphicon medium glyphicon-th-list mr10"></i>
+        Projects
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'list-task' %}">
+        <i class="glyphicon medium glyphicon-tasks mr10"></i>
+        Tasks
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'list-user' %}">
+        <i class="glyphicon medium glyphicon-user mr10"></i>
+        Contacts
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'list-team' %}">
+        <i class="glyphicon medium glyphicon-flag mr10"></i>
+        Teams
+      </a>
+    </li>
+  </ul>
+</nav>

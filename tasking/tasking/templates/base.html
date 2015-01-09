@@ -16,79 +16,33 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	{% wysiwyg_setup %}
 </head>
-<body>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="wrapper">
-				<!-- Header -->
-				<header>
-					<!-- User Area -->
-					<div id="user-area" class="autoflow mb20 vpad20 hpad20">
-						<figure class="ftlt mr10">
-								<img class="avatar" src="{{ user.avatar.url }}" alt="avatar" />
-						</figure>
-						<div class="mt5">
-							<span class="white"><b>{{ user.first_name }} {{ user.last_name }}</b></span><br />
-							<a href="/users/update/{{ user.id }}" class="mr5">
-								<span class="glyphicon glyphicon-cog"></span>
-							</a>
-							<a href="/messages/inbox" class="mr5">
-								<span class="glyphicon glyphicon-envelope"></span>
-							</a>
-							<a href="/users/logout" class="mr5">
-								<span class="glyphicon glyphicon-log-out"></span>
-							</a>
-						</div>
-					</div>
-					<!-- Navigation -->
-					<nav>
-						<p class="white verysmall upper hpad20">Browse</p>
-						<ul class="list-unstyled">
-							<li>
-								<a href="/"><span class="glyphicon medium glyphicon-dashboard mr10"></span>Dashboard</a>
-							</li>
-							<li>
-								<a href="{% url 'list-project' %}"><span class="glyphicon medium glyphicon-th-list mr10"></span>Projects</a>
-							</li>
-							<li>
-								<a href="{% url 'list-task' %}"><span class="glyphicon medium glyphicon-tasks mr10"></span>Tasks</a>
-							</li>
-							<li>
-								<a href="{% url 'list-user' %}"><span class="glyphicon medium glyphicon-user mr10"></span>Contacts</a>
-							</li>
-							<li>
-								<a href="{% url 'list-team' %}"><span class="glyphicon medium glyphicon-flag mr10"></span>Teams</a>
-							</li>
-						</ul>
-					</nav>
-				</header>
-				<!-- Secondary Information (Meta Data) -->
-				<aside>
-					{% block aside %}
-						<script>
-							$('aside').remove();
-						</script>
-					{% endblock %}
-				</aside>
-				<!-- Content -->
-				<main>
-					<!-- Primary Information -->
-					<article>
-						{% block article %}
-						{% endblock %}
-					</article>
-					<!-- Footer -->
-					<footer>
-						<!-- Sitemap -->
-						<!-- Return to top -->
-						{% block footer %}
-						{% endblock %}
-					</footer>
-				</main>
-				{% wysiwyg_editor "id_description" %}
-			</div>
-		</div>
-	</div>
+<body class="wrapper">
+	{% block header %}
+	<!-- Header -->
+	<header>
+		<!-- User Area -->
+		{% include 'user_area.html' %}
+		<!-- Navigation -->
+		{% include 'nav.html' %}
+	</header>
+	{% endblock %}
+	<!-- Secondary Information (Meta Data) -->
+	<aside>
+		{% block aside %}
+			<script>
+				$('aside').remove();
+			</script>
+		{% endblock %}
+	</aside>
+	<!-- Content -->
+	<main>
+		<!-- Primary Information -->
+		<article>
+			{% block article %}
+			{% endblock %}
+		</article>
+	</main>
+	{% wysiwyg_editor "id_description" %}
 	<!-- Scripts -->
   <script src="{% static 'lib/datepicker/js/bootstrap-datepicker.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>

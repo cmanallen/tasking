@@ -1,0 +1,89 @@
+{% load admin_static %}
+{% load i18n %}
+
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+  <!-- Title -->
+  <title>{% block title %}{% endblock %}</title>
+  <!-- Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}" />
+  <!-- Javascript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static "js/bootstrap.min.js" %}"></script>
+  {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+</head>
+<body class="wrapper">
+  {% if not is_popup %}
+  <!-- Heading - Branding, User Area -->
+  <header id="navigation">
+    <ul class="list-unstyled mb0 autoflow">
+      <li class="ftlt">
+        {% block branding %}
+        {% endblock %}
+      </li>
+      <li class="link ftlt"><a href="/admin">Admin</a></li>
+      <li class="link ftlt"><a href="/">View Site</a></li>
+      {% if user.is_active and user.is_staff %}
+        <li class="link link-right"><a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a></li>
+        {% if user.has_usable_password %}
+          <li class="link link-right"><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a></li>
+        {% endif %}
+        {% if site_url %}
+          <li class="link link-right"><a href="{{ site_url }}">{% trans 'View site' %}</a></li>
+        {% endif %}
+        {% url 'django-admindocs-docroot' as docsroot %}
+        {% if docsroot %}
+          <li class="link link-right"><a href="{{ docsroot }}">{% trans 'Documentation' %}</a></li>
+        {% endif %}
+      {% endif %}
+      {% block nav_search %}
+      {% endblock %}
+    </ul>
+    {% block nav-global %}{% endblock %}
+  </header>
+  {% endif %}
+  <!-- Content -->
+  <main>
+    <!-- Breadcrumbs -->
+    {% block breadcrumbs %}
+      <div class="breadcrumbs">
+        <div class="container-fluid">
+          <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+          {% if title %} &rsaquo; {{ title }}{% endif %}
+        </div>
+      </div>
+    {% endblock %}
+    <div class="container-fluid">
+      <!-- Content -->
+      <article class="col-md-10">
+        {% block pretitle %}{% endblock %}
+        {% block content_title %}
+          {% if title %}
+          <h3>{{ title }}</h3>
+          <hr />
+          {% endif %}
+        {% endblock %}
+        {% block content %}
+          {% block object-tools %}{% endblock %}
+          {{ content }}
+        {% endblock %}
+      </article>
+      <!-- Recent Activity -->
+      <aside class="col-md-2">
+        {% block sidebar %}
+        {% endblock %}
+      </aside>
+    </div>
+  </main>
+  <footer>
+    {% block footer %}
+    {% endblock %}
+  </footer>
+</body>
+</html>

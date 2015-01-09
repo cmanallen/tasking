@@ -257,3 +257,8 @@ input, textarea {
 input:focus, textarea:focus {
 	border:1px solid green;
 }
+
+.nav-link {color:white;}
+.nav-link:hover {color:white;}
+.nav-link span {color:gray;}
+.nav-link:hover span {color:white;}

@@ -1,12 +1,15 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
+from django.views.generic import (
+	ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
+)
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
-from tasks.models import Task, Comment, Attachment
 from users.models import User
-from tasks.forms import TaskForm, TaskCommentForm, TaskAttachmentForm
 
-# Tasks
+from .forms import TaskForm, TaskCommentForm, TaskAttachmentForm
+from .models import Task, Comment, Attachment
+
+
 class ListTask(ListView):
 	model = Task
 	template_name = 'list_task.html'
@@ -18,6 +21,7 @@ class ListTask(ListView):
 			user_task=self.request.user.id,
 		).extra(order_by=['due'])[:5]
 		return context
+
 
 class DetailTask(DetailView):
 	model = Task
@@ -32,6 +36,7 @@ class DetailTask(DetailView):
 		).values_list('pk', flat=True)
 		context['upload_form'] = TaskAttachmentForm
 		return context
+
 
 class CreateTask(CreateView):
 	model = Task
@@ -52,6 +57,7 @@ class CreateTask(CreateView):
 	def get_success_url(self):
 		return reverse('list-task')
 
+
 class UpdateTask(UpdateView):
 	model = Task
 	template_name = 'manage_task.html'
@@ -67,12 +73,14 @@ class UpdateTask(UpdateView):
 	def get_success_url(self):
 		return reverse('list-task')
 
+
 class DeleteTask(DeleteView):
 	model = Task
 	template_name = 'manage_task.html'
 
 	def get_success_url(self):
 		return reverse('list-task')
+
 
 def create_comment(request):
 	if request.method == 'POST':
@@ -83,6 +91,7 @@ def create_comment(request):
 			return HttpResponseRedirect(reverse('detail-task', kwargs={'pk': request.POST['task']}))
 		else:
 			return HttpResponseRedirect('/')
+
 
 def create_attachment(request):
 	if request.method == 'POST':
@@ -95,6 +104,7 @@ def create_attachment(request):
 		else:
 			return HttpResponseRedirect('/')
 
+
 def create_usertask(request):
 	if request.method == 'POST':
 		task = Task.objects.filter(id=request.POST['id'])
@@ -102,6 +112,7 @@ def create_usertask(request):
 			for t in task:
 				t.user_task.add(request.user.id)
 		return HttpResponseRedirect(reverse('detail-task', kwargs={'pk': request.POST['id']}))
+
 
 def complete_task(request):
 	if request.method == 'POST':

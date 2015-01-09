@@ -1,18 +1,22 @@
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Count
-from django.core.urlresolvers import reverse
+
 from utils.models import TimeStamp
 
-from django.conf import settings
+
 AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
-# Model Managers
+
 class TeamManager(models.Manager):
+	
 	def get_query_set(self):
 		return super(TeamManager, self).get_query_set().annotate(users=Count('user_team'))
 
-# Create your models here.
+
 class Team(TimeStamp):
+	
 	# Table Fields
 	name = models.CharField(max_length=255)
 	description = models.TextField()

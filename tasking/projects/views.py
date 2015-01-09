@@ -1,9 +1,12 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse
-from projects.models import Project
+from django.views.generic import (
+	ListView, DetailView, CreateView, UpdateView, DeleteView
+)
+
+from .models import Project
 from tasks.models import Task
 
-# Projects
+
 class ListProject(ListView):
 	model = Project
 	template_name = 'list_project.html'
@@ -11,6 +14,7 @@ class ListProject(ListView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(ListProject, self).get_context_data(*args, **kwargs)
 		return context
+
 
 class DetailProject(DetailView):
 	model = Project
@@ -20,6 +24,7 @@ class DetailProject(DetailView):
 		context = super(DetailProject, self).get_context_data(*args, **kwargs)
 		context['task_set'] = Task.objects.filter(project_id=self.get_object().id)
 		return context
+
 
 class CreateProject(CreateView):
 	model = Project
@@ -33,6 +38,7 @@ class CreateProject(CreateView):
 	def get_success_url(self):
 		return reverse('list-project')
 
+
 class UpdateProject(UpdateView):
 	model = Project
 	template_name = 'manage_project.html'
@@ -44,6 +50,7 @@ class UpdateProject(UpdateView):
 
 	def get_success_url(self):
 		return reverse('list-project')
+
 
 class DeleteProject(DeleteView):
 	model = Project

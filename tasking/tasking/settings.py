@@ -116,3 +116,4 @@ TEMPLATE_DIRS = (
 
 # User Profiles
 AUTH_USER_MODEL = "users.User"
+AUTH_PROFILE_MODULE = 'users.User'

@@ -32,15 +32,9 @@ class DetailUser(DetailView):
 
 
 class CreateUser(CreateView):
-<<<<<<< HEAD
 	model = User
 	template_name = 'manage_user.html'
 	form_class = UserCreationForm
-=======
-  model = User
-  template_name = 'manage_user.html'
-  form_class = UserRegisterForm
->>>>>>> c6656b17ba60ef73a0f37768c68dc2abfdd01366
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(CreateUser, self).get_context_data(*args, **kwargs)

@@ -4,11 +4,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
-import tasks.views
-import projects.views
-import users.views
-import teams.views
-
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'tasking.views.home', name='home'),
@@ -16,6 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^messages/', include('django_messages.urls')),
+<<<<<<< HEAD
     # Tasks
     url(r'^tasks/$', tasks.views.ListTask.as_view(),
     	name='list-task'),
@@ -76,4 +72,10 @@ urlpatterns = patterns('',
         name='update-team'),
     url(r'^teams/delete/(?P<pk>\d+)/$', teams.views.DeleteTeam.as_view(),
         name='delete-team'),
+=======
+    url(r'^users/', include('users.urls')),
+    url(r'^tasks/', include('tasks.urls')),
+    url(r'^projects/', include('projects.urls')),
+    url(r'^teams/', include('teams.urls')),
+>>>>>>> c6656b17ba60ef73a0f37768c68dc2abfdd01366
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

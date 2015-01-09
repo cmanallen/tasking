@@ -1,2 +1,4 @@
 env/
 *.pyc
+.python-version
+db.sqlite3
